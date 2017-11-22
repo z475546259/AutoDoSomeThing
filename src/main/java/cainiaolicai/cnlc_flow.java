@@ -20,21 +20,27 @@ import util.HttpClientUtil;
 import util.HttpRequest;
 
 public class cnlc_flow {
-//	public static void main(String[] args) {
-//		cnlc_login aa = new cnlc_login();
-//		aa.login();
-//	}
+	public static void main(String[] args) {
+		cnUser zzq2 = new cnUser();
+		zzq2.setTelephone("17320413743");
+		zzq2.setPassword("d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");
+		zzq2.setCnuserID("850152");
+		cnlc_flow flow =  new cnlc_flow();
+		flow.autoDo(zzq2);
+	}
 	public void autoDo(cnUser user){
 		HttpClientUtil httpUtil = new HttpClientUtil();
 		Map<String,String> para = new HashMap<String, String>();
 		para.put("telephone", user.getTelephone());
 		para.put("password", user.getPassword());
+		httpUtil.setCnUserID(user.getCnuserID());
+		httpUtil.setDeviceID(user.getDeviceID());
 		//登录
 		String login_res = httpUtil.doPost("http://app.cainiaolc.com/user/login", para, "utf-8");
-		System.out.println(login_res);
+		System.out.println("登录："+login_res);
 		//查看菜点
 		String coin_userSumary = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
-		System.out.println(coin_userSumary);
+		System.out.println("金币："+coin_userSumary);
 		//主页
 		String api_homeData = httpUtil.doGet("http://app.cainiaolc.com/api/homeData", "utf-8");
 		System.out.println(api_homeData);
@@ -86,21 +92,21 @@ public class cnlc_flow {
 		String coin_userSumary4 = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
 		System.out.println(coin_userSumary4);
 		//分享文章
-		for(int i=0;i<2;i++) {
-			int shareRandomId = (new Random()).nextInt(ids.size());
-			Map<String,String> share = new HashMap<String, String>();
-			System.out.println(ids.get(shareRandomId));
-			share.put("path", "/articleShare");
-			share.put("referer", "/article/"+ids.get(shareRandomId));
-			String share_result1 = httpUtil.doPost("http://app.cainiaolc.com/log/menuClick", para, "utf-8");
-			share.clear();
-			share.put("fk", ids.get(shareRandomId));
-			share.put("type", "7");
-			String share_result2 = httpUtil.doPost("http://app.cainiaolc.com/log/articleShare", para, "utf-8");
-			System.out.println(share_result1 + " and "+share_result2);	
-			String coin_userSumary5 = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
-			System.out.println(coin_userSumary5);
-		}
+//		for(int i=0;i<2;i++) {
+////			int shareRandomId = (new Random()).nextInt(ids.size());
+//			Map<String,String> share = new HashMap<String, String>();
+////			System.out.println(ids.get(shareRandomId));
+//			share.put("path", "/articleShare");
+//			share.put("referer", "/article/"+"659091");
+//			String share_result1 = httpUtil.doPost("http://app.cainiaolc.com/log/menuClick", para, "utf-8");
+//			share.clear();
+//			share.put("fk", "659091");
+//			share.put("type", "7");
+//			String share_result2 = httpUtil.doPost("http://app.cainiaolc.com/log/articleShare", para, "utf-8");
+//			System.out.println(share_result1 + " and "+share_result2);	
+//			String coin_userSumary5 = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
+//			System.out.println(coin_userSumary5);
+//		}
 		
 	}
 	public void getIDs(String api_homeData,List<String> ids) {

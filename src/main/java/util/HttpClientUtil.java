@@ -28,6 +28,20 @@ import org.apache.http.util.EntityUtils;
 public class HttpClientUtil {  
 	private HttpClient httpClient = null;
 	public List<String> cookies =new ArrayList<String>();
+	public String cnUserID ;
+	public String deviceID ;
+	public String getDeviceID() {
+		return deviceID;
+	}
+	public void setDeviceID(String deviceID) {
+		this.deviceID = deviceID;
+	}
+	public String getCnUserID() {
+		return cnUserID;
+	}
+	public void setCnUserID(String cnUserID) {
+		this.cnUserID = cnUserID;
+	}
 	public HttpClientUtil(){
 		try {
 			this.httpClient =  new SSLClient();
@@ -64,7 +78,7 @@ public class HttpClientUtil {
 //            connection.setRequestProperty("cnuser","0");
             httpPost.addHeader("cnver","V1");
             httpPost.addHeader("cnversion","1.1.8");
-            httpPost.addHeader("deviceid","31d2b13db676f532");
+            httpPost.addHeader("deviceid",deviceID);
             httpPost.addHeader("Connection","Keep-Alive");
             httpPost.addHeader("Host","app.cainiaolc.com");
             
@@ -205,10 +219,10 @@ public class HttpClientUtil {
     	  httpGet.addHeader("accept-time","20170102114010");
     	  httpGet.addHeader("cnos","android");
     	  httpGet.addHeader("cnpid","cainiaolc");
-    	  httpGet.addHeader("cnuser","2568");
+    	  httpGet.addHeader("cnuser",cnUserID);
     	  httpGet.addHeader("cnver","V1");
     	  httpGet.addHeader("cnversion","1.1.8");
-    	  httpGet.addHeader("deviceid","31d2b13db676f532");
+    	  httpGet.addHeader("deviceid",deviceID);
     	  httpGet.addHeader("Connection","Keep-Alive");
     	  httpGet.addHeader("Host","app.cainiaolc.com");
     	  for(int i=0;i<cookies.size();i++){
