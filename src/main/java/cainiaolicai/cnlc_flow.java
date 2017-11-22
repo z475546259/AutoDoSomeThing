@@ -19,16 +19,16 @@ import util.HttpClientRequest;
 import util.HttpClientUtil;
 import util.HttpRequest;
 
-public class cnlc_login {
-	public static void main(String[] args) {
-		cnlc_login aa = new cnlc_login();
-		aa.login();
-	}
-	public void login(){
+public class cnlc_flow {
+//	public static void main(String[] args) {
+//		cnlc_login aa = new cnlc_login();
+//		aa.login();
+//	}
+	public void autoDo(cnUser user){
 		HttpClientUtil httpUtil = new HttpClientUtil();
 		Map<String,String> para = new HashMap<String, String>();
-		para.put("telephone", "15923584508");
-		para.put("password", "d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");
+		para.put("telephone", user.getTelephone());
+		para.put("password", user.getPassword());
 		//登录
 		String login_res = httpUtil.doPost("http://app.cainiaolc.com/user/login", para, "utf-8");
 		System.out.println(login_res);
@@ -41,19 +41,19 @@ public class cnlc_login {
 		List<String> ids = new ArrayList<String>();
 		getIDs(api_homeData,ids);
 		
-//        for (String id : ids) {
-//        	//查看文章
-//        	String article_detailSimple = httpUtil.doGet("http://app.cainiaolc.com/article/detailSimple?id="+id, "utf-8");
-//    		System.out.println(article_detailSimple);
-//    		String coin_userSumary2 = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
-//    		System.out.println(coin_userSumary2);
-//    		try {
-//				Thread.sleep(10000);
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
+        for (String id : ids) {
+        	//查看文章
+        	String article_detailSimple = httpUtil.doGet("http://app.cainiaolc.com/article/detailSimple?id="+id, "utf-8");
+    		System.out.println(article_detailSimple);
+    		String coin_userSumary2 = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
+    		System.out.println(coin_userSumary2);
+    		try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
         //发帖
 //        String forum_content = "你们说一个人的资金大概分散投资到多少个平台合适？";
 //        Map<String,String> forum_para = new HashMap<String, String>();
