@@ -1,7 +1,5 @@
 package cainiaolicai;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -9,15 +7,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import org.apache.http.client.HttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
-
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
-import util.HttpClientRequest;
 import util.HttpClientUtil;
-import util.HttpRequest;
 
 public class cnlc_flow {
 	public static void main(String[] args) {
@@ -27,6 +20,8 @@ public class cnlc_flow {
 		zzq2.setCnuserID("850152");
 		cnlc_flow flow =  new cnlc_flow();
 		flow.autoDo(zzq2);
+//		HttpClientUtil aa =  new HttpClientUtil();
+//		System.out.println(aa.doFormPost("http://app.cainiaolc.com/forum/post", new HashMap<String, String>(), "GB2312"));
 	}
 	public void autoDo(cnUser user){
 		HttpClientUtil httpUtil = new HttpClientUtil();
@@ -41,6 +36,27 @@ public class cnlc_flow {
 		//查看菜点
 		String coin_userSumary = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
 		System.out.println("金币："+coin_userSumary);
+		//进入APP
+		para.clear();
+		para.put("version", "1.1.8");
+		para.put("w", "360");
+		para.put("h", "640");
+		String appOpen = httpUtil.doPost("http://app.cainiaolc.com/log/appOpen", para, "utf-8");
+		System.out.println("进入APP："+appOpen);
+		//绑定token
+		para.clear();
+		para.put("os", "android");
+		para.put("token", "");
+		para.put("version", "");
+		para.put("regId", "190e35f7e07b8825172");
+		String bindToken = httpUtil.doPost("http://app.cainiaolc.com/account/bindToken", para, "utf-8");
+		System.out.println("绑定token："+bindToken);
+		//获取用户信息
+		String user_info = httpUtil.doGet("http://app.cainiaolc.com/user/info", "utf-8");
+		System.out.println(user_info);
+		//打标历史
+		String tag_history = httpUtil.doGet("http://app.cainiaolc.com/user/tagHistory", "utf-8");
+		System.out.println(tag_history);
 		//主页
 		String api_homeData = httpUtil.doGet("http://app.cainiaolc.com/api/homeData", "utf-8");
 		System.out.println(api_homeData);

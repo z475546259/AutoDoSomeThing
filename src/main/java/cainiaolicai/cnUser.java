@@ -1,7 +1,5 @@
 package cainiaolicai;
 
-import java.util.Map;
-
 public class cnUser {
 	public String telephone;
 	public String password;
