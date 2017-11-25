@@ -43,6 +43,13 @@ public class HttpClientUtil {
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
 	public String cnUserID ;
 	public String deviceID ;
+	public String user_agent;
+	public String getUser_agent() {
+		return user_agent;
+	}
+	public void setUser_agent(String user_agent) {
+		this.user_agent = user_agent;
+	}
 	public String getDeviceID() {
 		return deviceID;
 	}
@@ -73,7 +80,7 @@ public class HttpClientUtil {
             // 设置通用的请求属性
             httpPost.addHeader("accept","application/json");
             httpPost.addHeader("Accept-Encoding","gzip");
-            httpPost.addHeader("user-agent","Dalvik/2.1.0 (Linux; U; Android 6.0.1; Redmi 4A MIUI/V8.5.4.0.MCCCNED)");
+            httpPost.addHeader("user-agent",user_agent);
 //            httpPost.addHeader("Content-Length","95");
             httpPost.addHeader("Content-Type","application/x-www-form-urlencoded;charset=UTF-8");
 //            connection.setRequestProperty("accept-secret","1ab3a18b89fe064caad6fc4138a2adfdef48a898ecfa078c46b9c2bfd0202d0d");
@@ -100,8 +107,8 @@ public class HttpClientUtil {
             for(int i=0;i<cookies.size();i++){
             	httpPost.addHeader("Cookie", cookies.get(i));
       	  	}
-            HttpResponse response = httpClient.execute(target,httpPost);  
-            
+//            HttpResponse response = httpClient.execute(target,httpPost);  
+            HttpResponse response = httpClient.execute(httpPost);
             if(response != null){  
 //            	System.out.println(response.getAllHeaders()[0].getName());
             	for(Header header:response.getAllHeaders() ){
@@ -133,7 +140,7 @@ public class HttpClientUtil {
           // 设置通用的请求属性
           httpPost.addHeader("accept","application/json");
           httpPost.addHeader("Accept-Encoding","gzip");
-          httpPost.addHeader("user-agent","Dalvik/2.1.0 (Linux; U; Android 6.0.1; Redmi 4A MIUI/V8.5.4.0.MCCCNED)");
+          httpPost.addHeader("user-agent",user_agent);
 //          httpPost.addHeader("Content-Length","556");
           httpPost.addHeader("Content-Type","multipart/form-data; boundary=d8067f7c-133d-4ec6-94ae-ae1da7c45225");
           httpPost.addHeader("accept-secret","c9373cf0994ac5dc1ef3827698881cd76865b84020f2dc5e5eb54c52ba1a4baa");
@@ -153,7 +160,8 @@ public class HttpClientUtil {
           multipartEntity.addPart("cateId", new StringBody("225410", Charset.forName("UTF-8")));
           multipartEntity.addPart("upload", new StringBody("0", Charset.forName("UTF-8")));
           httpPost.setEntity(multipartEntity);
-          HttpResponse response = httpClient.execute(target,httpPost);  
+//          HttpResponse response = httpClient.execute(target,httpPost); 
+          HttpResponse response = httpClient.execute(httpPost); 
           if(response != null){  
           	for(Header header:response.getAllHeaders() ){
           		if(header.getName().equalsIgnoreCase("Set-Cookie")){
@@ -185,7 +193,7 @@ public class HttpClientUtil {
     	  // 设置通用的请求属性
 //    	  httpGet.addHeader("accept","application/json");
 //    	  httpGet.addHeader("Accept-Encoding","gzip");
-//    	  httpGet.addHeader("user-agent","Dalvik/2.1.0 (Linux; U; Android 6.0.1; Redmi 4A MIUI/V8.5.4.0.MCCCNED)");
+    	  httpGet.addHeader("user-agent",user_agent);
 //    	  httpGet.addHeader("Content-Length","95");
 //    	  httpGet.addHeader("Content-Type","application/x-www-form-urlencoded;charset=UTF-8");
     	  httpGet.addHeader("accept-secret","8eb478d177537ade7587bfafd52b1c9299e46c0a3881877469e6a5276e2a68d2");
@@ -205,7 +213,8 @@ public class HttpClientUtil {
     	  }
     	  
           //璁剧疆鍙傛暟  
-          HttpResponse response = httpClient.execute(target,httpGet);  
+//          HttpResponse response = httpClient.execute(target,httpGet);
+          HttpResponse response = httpClient.execute(httpGet);
           if(response != null){  
           	for(Header header:response.getAllHeaders() ){
 //        		System.out.println(header.getName()+"="+header.getValue());

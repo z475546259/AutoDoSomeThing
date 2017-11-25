@@ -30,6 +30,7 @@ public class cnlc_flow {
 		para.put("password", user.getPassword());
 		httpUtil.setCnUserID(user.getCnuserID());
 		httpUtil.setDeviceID(user.getDeviceID());
+		httpUtil.setUser_agent(user.getUser_agent());
 		//µÇÂ¼
 		String login_res = httpUtil.doPost("http://app.cainiaolc.com/user/login", para, "utf-8");
 		System.out.println("µÇÂ¼£º"+login_res);
