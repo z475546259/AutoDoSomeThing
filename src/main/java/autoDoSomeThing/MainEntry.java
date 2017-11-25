@@ -38,6 +38,8 @@ public class MainEntry {
 		cnlc_flow flow =  new cnlc_flow();
 		flow.autoDo(zzq1);
 		flow.autoDo(zzq2);
+		flow.autoDo(zzq3);
+		flow.autoDo(zzq4);
 		System.out.println("~~~~主函数完了~~~");
 	}
 
