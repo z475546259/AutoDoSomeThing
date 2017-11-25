@@ -109,21 +109,29 @@ public class cnlc_flow {
 		String coin_userSumary4 = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
 		System.out.println(coin_userSumary4);
 		//分享文章
-//		for(int i=0;i<2;i++) {
-////			int shareRandomId = (new Random()).nextInt(ids.size());
-//			Map<String,String> share = new HashMap<String, String>();
-////			System.out.println(ids.get(shareRandomId));
-//			share.put("path", "/articleShare");
-//			share.put("referer", "/article/"+"659091");
-//			String share_result1 = httpUtil.doPost("http://app.cainiaolc.com/log/menuClick", para, "utf-8");
-//			share.clear();
-//			share.put("fk", "659091");
-//			share.put("type", "7");
-//			String share_result2 = httpUtil.doPost("http://app.cainiaolc.com/log/articleShare", para, "utf-8");
-//			System.out.println(share_result1 + " and "+share_result2);	
-//			String coin_userSumary5 = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
-//			System.out.println(coin_userSumary5);
-//		}
+		for(int i=0;i<2;i++) {
+			int shareRandomId = (new Random()).nextInt(ids.size());
+			String article_detailSimple2 = httpUtil.doGet("http://app.cainiaolc.com/article/detailSimple?id="+ids.get(shareRandomId), "utf-8");
+			System.out.println(article_detailSimple2);
+			Map<String,String> share = new HashMap<String, String>();
+//			System.out.println(ids.get(shareRandomId));
+			share.put("path", "/articleShare");
+			share.put("referer", "/article/"+ids.get(shareRandomId));
+			String share_result1 = httpUtil.doPost("http://app.cainiaolc.com/log/menuClick", share, "utf-8");
+			share.clear();
+			share.put("fk", ids.get(shareRandomId));
+			share.put("type", "7");
+			String share_result2 = httpUtil.doPost("http://app.cainiaolc.com/log/articleShare", share, "utf-8");
+			System.out.println("第"+i+"次随机分享的文章ID是："+ ids.get(shareRandomId)+ " and "+share_result2);	
+			String coin_userSumary5 = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
+			System.out.println(coin_userSumary5);
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 	}
 	public void getIDs(String api_homeData,List<String> ids) {
