@@ -34,12 +34,19 @@ public class MainEntry {
 		zzq4.setCnuserID("853034");
 		zzq4.setDeviceID("39902e20922d0ec3");
 		zzq4.setUser_agent("Dalvik/2.1.0 (Linux; U; Android 5.1; HUAWEI TAG-AL00 Build/HUAWEITAG-AL00)");
+		cnUser zzq5 = new cnUser();
+		zzq5.setTelephone("13512376362");
+		zzq5.setPassword("d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");
+		zzq5.setCnuserID("854372");
+		zzq5.setDeviceID("cd667fd538874d833");
+		zzq5.setUser_agent("Dalvik/2.1.0 (Linux; U; Android 5.1; HUAWEI TAG-AL00 Build/HUAWEITAG-AL00)");
 		
 		cnlc_flow flow =  new cnlc_flow();
 		flow.autoDo(zzq1);
 		flow.autoDo(zzq2);
 		flow.autoDo(zzq3);
 		flow.autoDo(zzq4);
+		flow.autoDo(zzq5);
 		System.out.println("~~~~主函数完了~~~");
 	}
 

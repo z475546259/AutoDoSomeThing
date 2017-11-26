@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import org.apache.http.HttpHost;
+
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
@@ -31,6 +33,8 @@ public class cnlc_flow {
 		httpUtil.setCnUserID(user.getCnuserID());
 		httpUtil.setDeviceID(user.getDeviceID());
 		httpUtil.setUser_agent(user.getUser_agent());
+//		HttpHost target  = new HttpHost("192.168.1.4", 8888,  "http");
+//		httpUtil.setTarget(target);
 		//登录
 		String login_res = httpUtil.doPost("http://app.cainiaolc.com/user/login", para, "utf-8");
 		System.out.println("登录："+login_res);
@@ -109,8 +113,17 @@ public class cnlc_flow {
 		String coin_userSumary4 = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
 		System.out.println(coin_userSumary4);
 		//分享文章
+		Random random = new Random();
+		int first_id = 0;
 		for(int i=0;i<2;i++) {
-			int shareRandomId = (new Random()).nextInt(ids.size());
+			//主页
+			api_homeData = httpUtil.doGet("http://app.cainiaolc.com/api/homeData", "utf-8");
+			System.out.println("为了分享访问主页"+api_homeData);
+			int shareRandomId = random.nextInt(ids.size());
+			while(shareRandomId==first_id){
+				shareRandomId = random.nextInt(ids.size());
+			}
+			first_id = shareRandomId;
 			String article_detailSimple2 = httpUtil.doGet("http://app.cainiaolc.com/article/detailSimple?id="+ids.get(shareRandomId), "utf-8");
 			System.out.println(article_detailSimple2);
 			Map<String,String> share = new HashMap<String, String>();
@@ -126,7 +139,7 @@ public class cnlc_flow {
 			String coin_userSumary5 = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
 			System.out.println(coin_userSumary5);
 			try {
-				Thread.sleep(5000);
+				Thread.sleep(15000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

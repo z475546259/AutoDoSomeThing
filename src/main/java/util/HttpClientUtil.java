@@ -38,7 +38,14 @@ import org.apache.http.util.EntityUtils;
 public class HttpClientUtil {  
 	private HttpClient httpClient = null;
 	public List<String> cookies =new ArrayList<String>();
-	HttpHost target = new HttpHost("192.168.1.4", 8888,  "http"); 
+	HttpHost target ;// = new HttpHost("192.168.1.4", 8888,  "http"); 
+	public HttpHost getTarget() {
+		return target;
+	}
+	public void setTarget(HttpHost target) {
+		this.target = target;
+	}
+
 	Date date = Calendar.getInstance().getTime();
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
 	public String cnUserID ;
@@ -107,8 +114,15 @@ public class HttpClientUtil {
             for(int i=0;i<cookies.size();i++){
             	httpPost.addHeader("Cookie", cookies.get(i));
       	  	}
-            HttpResponse response = httpClient.execute(target,httpPost);  
-//            HttpResponse response = httpClient.execute(httpPost);
+            HttpResponse response;
+            if(target==null){
+            	 response = httpClient.execute(httpPost);
+            }else{
+            	 response = httpClient.execute(target,httpPost);
+            }
+            
+             
+//            
             if(response != null){  
 //            	System.out.println(response.getAllHeaders()[0].getName());
             	for(Header header:response.getAllHeaders() ){
@@ -160,8 +174,12 @@ public class HttpClientUtil {
           multipartEntity.addPart("cateId", new StringBody("225410", Charset.forName("UTF-8")));
           multipartEntity.addPart("upload", new StringBody("0", Charset.forName("UTF-8")));
           httpPost.setEntity(multipartEntity);
-          HttpResponse response = httpClient.execute(target,httpPost); 
-//          HttpResponse response = httpClient.execute(httpPost); 
+          HttpResponse response;
+          if(target==null){
+          	 response = httpClient.execute(httpPost);
+          }else{
+          	 response = httpClient.execute(target,httpPost);
+          }
           if(response != null){  
           	for(Header header:response.getAllHeaders() ){
           		if(header.getName().equalsIgnoreCase("Set-Cookie")){
@@ -213,8 +231,12 @@ public class HttpClientUtil {
     	  }
     	  
           //设置参数  
-          HttpResponse response = httpClient.execute(target,httpGet);
-//          HttpResponse response = httpClient.execute(httpGet);
+    	  HttpResponse response;
+          if(target==null){
+          	 response = httpClient.execute(httpGet);
+          }else{
+          	 response = httpClient.execute(target,httpGet);
+          }
           if(response != null){  
           	for(Header header:response.getAllHeaders() ){
 //        		System.out.println(header.getName()+"="+header.getValue());
