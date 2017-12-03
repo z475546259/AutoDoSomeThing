@@ -2,6 +2,7 @@ package autoDoSomeThing;
 
 import cainiaolicai.cnUser;
 import cainiaolicai.cnlc_flow;
+import jingminggou.jmg_flow;
 
 public class MainEntry {
 
@@ -47,6 +48,11 @@ public class MainEntry {
 		flow.autoDo(zzq3);
 		flow.autoDo(zzq4);
 		flow.autoDo(zzq5);
+		
+		
+		//精明购的自动签到
+		jmg_flow aa =  new jmg_flow();
+		aa.autoDo();
 		System.out.println("~~~~主函数完了~~~");
 	}
 
