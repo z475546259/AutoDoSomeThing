@@ -41,6 +41,13 @@ public class MainEntry {
 		zzq5.setCnuserID("854372");
 		zzq5.setDeviceID("cd667fd538874d833");
 		zzq5.setUser_agent("Dalvik/2.1.0 (Linux; U; Android 5.1; HUAWEI TAG-AL00 Build/HUAWEITAG-AL00)");
+		cnUser zzq6 = new cnUser();
+		zzq6.setTelephone("15823270454");
+		zzq6.setPassword("d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");
+		zzq6.setCnuserID("858732");
+		zzq6.setDeviceID("ef778fd649985f944");
+		zzq6.setUser_agent("Dalvik/2.1.0 (Linux; U; Android 5.0; HUAWEI TAG-AL00 Build/HUAWEITAG-AL00)");
+		
 		
 		cnlc_flow flow =  new cnlc_flow();
 		flow.autoDo(zzq1);
@@ -48,12 +55,9 @@ public class MainEntry {
 		flow.autoDo(zzq3);
 		flow.autoDo(zzq4);
 		flow.autoDo(zzq5);
-		
-		
-		//精明购的自动签到
+		flow.autoDo(zzq6);		//精明购的自动签到
 		jmg_flow aa =  new jmg_flow();
-		aa.autoDo();
-		System.out.println("~~~~主函数完了~~~");
+		aa.autoDo()		System.out.println("~~~~主函数完了~~~");
 	}
 
 }
