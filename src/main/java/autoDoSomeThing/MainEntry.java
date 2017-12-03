@@ -57,7 +57,8 @@ public class MainEntry {
 		flow.autoDo(zzq5);
 		flow.autoDo(zzq6);		//精明购的自动签到
 		jmg_flow aa =  new jmg_flow();
-		aa.autoDo()		System.out.println("~~~~主函数完了~~~");
+		aa.autoDo();
+		System.out.println("~~~~主函数完了~~~");
 	}
 
 }
