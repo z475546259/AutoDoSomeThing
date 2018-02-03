@@ -48,6 +48,28 @@ public class MainEntry {
 		zzq6.setDeviceID("ef778fd649985f944");
 		zzq6.setUser_agent("Dalvik/2.1.0 (Linux; U; Android 5.0; HUAWEI TAG-AL00 Build/HUAWEITAG-AL00)");
 		
+		cnUser zzq7 = new cnUser();
+		zzq7.setTelephone("15213114321");//马昭通手机号
+		zzq7.setPassword("d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");
+		zzq7.setCnuserID("922203");
+		zzq7.setDeviceID("fghk8fd6499855678");
+		zzq7.setUser_agent("Dalvik/2.1.0 (Linux; U; Android 5.0; HUAWEI TAG-AL00 Build/HUAWEITAG-AL00)");
+		
+		
+		cnUser zzq8 = new cnUser();
+		zzq8.setTelephone("18983825399");//肖德华账号
+		zzq8.setPassword("d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");
+		zzq8.setCnuserID("922239");
+		zzq8.setDeviceID("rtdf8fd649985494");
+		zzq8.setUser_agent("Dalvik/2.1.0 (Linux; U; Android 5.0; HUAWEI TAG-AL00 Build/HUAWEITAG-AL00)");
+		
+		cnUser zzq9 = new cnUser();
+		zzq9.setTelephone("13922962046");//肖德华账号
+		zzq9.setPassword("d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");
+		zzq9.setCnuserID("922404");
+		zzq9.setDeviceID("rtdf8fd649985494");
+		zzq9.setUser_agent("Dalvik/2.1.0 (Linux; U; Android 5.0; HUAWEI TAG-AL00 Build/HUAWEITAG-AL00)");
+		
 		
 		cnlc_flow flow =  new cnlc_flow();
 		flow.autoDo(zzq1);
@@ -55,7 +77,10 @@ public class MainEntry {
 		flow.autoDo(zzq3);
 		flow.autoDo(zzq4);
 		flow.autoDo(zzq5);
-		flow.autoDo(zzq6);		//精明购的自动签到
+		flow.autoDo(zzq6);
+		flow.autoDo(zzq7);
+		flow.autoDo(zzq8);
+		//精明购的自动签到
 //		jmg_flow aa =  new jmg_flow();
 //		aa.autoDo();
 		System.out.println("~~~~主函数完了~~~");

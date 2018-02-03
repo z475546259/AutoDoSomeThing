@@ -169,7 +169,7 @@ public class HttpClientUtil {
           httpPost.addHeader("Host","app.cainiaolc.com");
           
           MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE,"d8067f7c-133d-4ec6-94ae-ae1da7c45225", Charset.defaultCharset());
-          multipartEntity.addPart("content", new StringBody("我是一个新手，希望大家介绍点钱生钱的道子", Charset.forName("UTF-8")));
+          multipartEntity.addPart("content", new StringBody(map.get("content"), Charset.forName("UTF-8")));
           multipartEntity.addPart("category", new StringBody("p2p", Charset.forName("UTF-8")));
           multipartEntity.addPart("cateId", new StringBody("225410", Charset.forName("UTF-8")));
           multipartEntity.addPart("upload", new StringBody("0", Charset.forName("UTF-8")));
