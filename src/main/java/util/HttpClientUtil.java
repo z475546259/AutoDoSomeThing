@@ -158,18 +158,18 @@ public class HttpClientUtil {
 //          httpPost.addHeader("Content-Length","556");
           httpPost.addHeader("Content-Type","multipart/form-data; boundary=d8067f7c-133d-4ec6-94ae-ae1da7c45225");
           httpPost.addHeader("accept-secret","c9373cf0994ac5dc1ef3827698881cd76865b84020f2dc5e5eb54c52ba1a4baa");
-          httpPost.addHeader("accept-time","2017010221730");
+          httpPost.addHeader("accept-time",sdf.format(date));
           httpPost.addHeader("cnos","android");
           httpPost.addHeader("cnpid","cainiaolc");
-          httpPost.addHeader("cnuser","850152");
+          httpPost.addHeader("cnuser",cnUserID);
           httpPost.addHeader("cnver","V1");
           httpPost.addHeader("cnversion","1.1.8");
-          httpPost.addHeader("deviceid","31d2b13db676f532");
+          httpPost.addHeader("deviceid",deviceID);
           httpPost.addHeader("Connection","Keep-Alive");
           httpPost.addHeader("Host","app.cainiaolc.com");
           
           MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE,"d8067f7c-133d-4ec6-94ae-ae1da7c45225", Charset.defaultCharset());
-          multipartEntity.addPart("content", new StringBody("我是一个新手，希望大家介绍点钱生钱的道子", Charset.forName("UTF-8")));
+          multipartEntity.addPart("content", new StringBody(map.get("content"), Charset.forName("UTF-8")));
           multipartEntity.addPart("category", new StringBody("p2p", Charset.forName("UTF-8")));
           multipartEntity.addPart("cateId", new StringBody("225410", Charset.forName("UTF-8")));
           multipartEntity.addPart("upload", new StringBody("0", Charset.forName("UTF-8")));
