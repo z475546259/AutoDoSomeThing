@@ -13,6 +13,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import util.HttpClientUtil;
+import util.OperateOracle;
 
 public class cnlc_flow {
 	public static void main(String[] args) {
@@ -36,91 +37,91 @@ public class cnlc_flow {
 		httpUtil.setUser_agent(user.getUser_agent());
 //		HttpHost target  = new HttpHost("192.168.1.4", 8888,  "http");
 //		httpUtil.setTarget(target);
-		//µÇÂ¼
+		//ç™»å½•
 		String login_res = httpUtil.doPost("http://app.cainiaolc.com/user/login", para, "utf-8");
-		System.out.println("µÇÂ¼£º"+login_res);
-		//²é¿´²Ëµã
+		System.out.println("ç™»å½•ï¼š"+login_res);
+		//æŸ¥çœ‹èœç‚¹
 		String coin_userSumary = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
-		System.out.println("½ğ±Ò£º"+coin_userSumary);
-		//½øÈëAPP
+		System.out.println("é‡‘å¸ï¼š"+coin_userSumary);
+		//è¿›å…¥APP
 		para.clear();
 		para.put("version", "1.1.8");
 		para.put("w", "360");
 		para.put("h", "640");
 		String appOpen = httpUtil.doPost("http://app.cainiaolc.com/log/appOpen", para, "utf-8");
-		System.out.println("½øÈëAPP£º"+appOpen);
-		//°ó¶¨token
+		System.out.println("è¿›å…¥APPï¼š"+appOpen);
+		//ç»‘å®štoken
 		para.clear();
 		para.put("os", "android");
 		para.put("token", "");
 		para.put("version", "");
 		para.put("regId", "190e35f7e07b8825172");
 		String bindToken = httpUtil.doPost("http://app.cainiaolc.com/account/bindToken", para, "utf-8");
-		System.out.println("°ó¶¨token£º"+bindToken);
-		//»ñÈ¡ÓÃ»§ĞÅÏ¢
+		System.out.println("ç»‘å®štokenï¼š"+bindToken);
+		//è·å–ç”¨æˆ·ä¿¡æ¯
 		String user_info = httpUtil.doGet("http://app.cainiaolc.com/user/info", "utf-8");
-		System.out.println(user.getTelephone()+"µÄÓÃ»§ĞÅÏ¢"+user_info);
-		//´ò±êÀúÊ·
+		System.out.println(user.getTelephone()+"çš„ç”¨æˆ·ä¿¡æ¯"+user_info);
+		//æ‰“æ ‡å†å²
 		String tag_history = httpUtil.doGet("http://app.cainiaolc.com/user/tagHistory", "utf-8");
 //		System.out.println(tag_history);
-		//Ö÷Ò³
+		//ä¸»é¡µ
 		String api_homeData = httpUtil.doGet("http://app.cainiaolc.com/api/homeData", "utf-8");
 //		System.out.println(api_homeData);
 		List<String> ids = new ArrayList<String>();
 		getIDs(api_homeData,ids);
-		
-        for (String id : ids) {
-        	//²é¿´ÎÄÕÂ
-        	String article_detailSimple = httpUtil.doGet("http://app.cainiaolc.com/article/detailSimple?id="+id, "utf-8");
+
+		for (String id : ids) {
+			//æŸ¥çœ‹æ–‡ç« 
+			String article_detailSimple = httpUtil.doGet("http://app.cainiaolc.com/article/detailSimple?id="+id, "utf-8");
 //    		System.out.println(article_detailSimple);
-    		String coin_userSumary2 = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
+			String coin_userSumary2 = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
 //    		System.out.println(coin_userSumary2);
-    		try {
+			try {
 				Thread.sleep(10000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-      //ÊÕ²ØÎÄÕÂ
-      		int randomId = (new Random()).nextInt(ids.size());
-      		String article_detailSimple = httpUtil.doGet("http://app.cainiaolc.com/article/favor?id="+ids.get(randomId)+"&status=1", "utf-8");
-      		System.out.println(article_detailSimple);
-      		String coin_userSumary4 = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
-      		System.out.println(coin_userSumary4);
-      		//·ÖÏíÎÄÕÂ
-      		int first_id = 0;
-      		for(int i=0;i<2;i++) {
-      			//Ö÷Ò³
-      			api_homeData = httpUtil.doGet("http://app.cainiaolc.com/api/homeData", "utf-8");
-      			System.out.println("ÎªÁË·ÖÏí·ÃÎÊÖ÷Ò³"+api_homeData);
-      			int shareRandomId = random.nextInt(ids.size());
-      			while(shareRandomId==first_id){
-      				shareRandomId = random.nextInt(ids.size());
-      			}
-      			first_id = shareRandomId;
-      			String article_detailSimple2 = httpUtil.doGet("http://app.cainiaolc.com/article/detailSimple?id="+ids.get(shareRandomId), "utf-8");
-      			System.out.println(article_detailSimple2);
-      			Map<String,String> share = new HashMap<String, String>();
+		//æ”¶è—æ–‡ç« 
+		int randomId = (new Random()).nextInt(ids.size());
+		String article_detailSimple = httpUtil.doGet("http://app.cainiaolc.com/article/favor?id="+ids.get(randomId)+"&status=1", "utf-8");
+		System.out.println(article_detailSimple);
+		String coin_userSumary4 = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
+		System.out.println(coin_userSumary4);
+		//åˆ†äº«æ–‡ç« 
+		int first_id = 0;
+		for(int i=0;i<2;i++) {
+			//ä¸»é¡µ
+			api_homeData = httpUtil.doGet("http://app.cainiaolc.com/api/homeData", "utf-8");
+			System.out.println("ä¸ºäº†åˆ†äº«è®¿é—®ä¸»é¡µ"+api_homeData);
+			int shareRandomId = random.nextInt(ids.size());
+			while(shareRandomId==first_id){
+				shareRandomId = random.nextInt(ids.size());
+			}
+			first_id = shareRandomId;
+			String article_detailSimple2 = httpUtil.doGet("http://app.cainiaolc.com/article/detailSimple?id="+ids.get(shareRandomId), "utf-8");
+			System.out.println(article_detailSimple2);
+			Map<String,String> share = new HashMap<String, String>();
 //      			System.out.println(ids.get(shareRandomId));
-      			share.put("path", "/articleShare");
-      			share.put("referer", "/article/"+ids.get(shareRandomId));
-      			String share_result1 = httpUtil.doPost("http://app.cainiaolc.com/log/menuClick", share, "utf-8");
-      			share.clear();
-      			share.put("fk", ids.get(shareRandomId));
-      			share.put("type", "7");
-      			String share_result2 = httpUtil.doPost("http://app.cainiaolc.com/log/articleShare", share, "utf-8");
-      			System.out.println("µÚ"+i+"´ÎËæ»ú·ÖÏíµÄÎÄÕÂIDÊÇ£º"+ ids.get(shareRandomId)+ " and "+share_result2);	
-      			String coin_userSumary5 = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
-      			System.out.println(coin_userSumary5);
-      			try {
-      				Thread.sleep(15000);
-      			} catch (InterruptedException e) {
-      				// TODO Auto-generated catch block
-      				e.printStackTrace();
-      			}
-      		}
-        //»ñÈ¡±ğÈË·¢ÌûÄÚÈİÁĞ±í
+			share.put("path", "/articleShare");
+			share.put("referer", "/article/"+ids.get(shareRandomId));
+			String share_result1 = httpUtil.doPost("http://app.cainiaolc.com/log/menuClick", share, "utf-8");
+			share.clear();
+			share.put("fk", ids.get(shareRandomId));
+			share.put("type", "7");
+			String share_result2 = httpUtil.doPost("http://app.cainiaolc.com/log/articleShare", share, "utf-8");
+			System.out.println("ç¬¬"+i+"æ¬¡éšæœºåˆ†äº«çš„æ–‡ç« IDæ˜¯ï¼š"+ ids.get(shareRandomId)+ " and "+share_result2);
+			String coin_userSumary5 = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
+			System.out.println(coin_userSumary5);
+			try {
+				Thread.sleep(15000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		//è·å–åˆ«äººå‘å¸–å†…å®¹åˆ—è¡¨
 		String article_list= httpUtil.doGet("http://app.cainiaolc.com/forum/list?page=1&perpage=1000&cate=225410&order=time", "utf-8");
 		JSONObject json1 = JSONObject.parseObject(article_list);
 		JSONArray  articles = json1.getJSONArray("Data");
@@ -136,26 +137,26 @@ public class cnlc_flow {
 			}
 		}
 		System.out.println(contentList.size()+"-----"+contentIDs.size());
-//        ·¢Ìû
-        String forum_content = contentList.get(random.nextInt(contentList.size()));
-        System.out.println("Ëæ»úØâÇÔµÄÎÄÕÂ=="+forum_content);
-        Map<String,String> forum_para = new HashMap<String, String>();
-        try {
-		    forum_para.put("content", forum_content);
+//        å‘å¸–
+		String forum_content = contentList.get(random.nextInt(contentList.size()));
+		System.out.println("éšæœºå‰½çªƒçš„æ–‡ç« =="+forum_content);
+		Map<String,String> forum_para = new HashMap<String, String>();
+		try {
+			forum_para.put("content", forum_content);
 			forum_para.put("category", "p2p");
-		    forum_para.put("cateId", "225410");
-		    forum_para.put("upload", "0");
+			forum_para.put("cateId", "225410");
+			forum_para.put("upload", "0");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-       
-        String forum_post = httpUtil.doFormPost("http://app.cainiaolc.com/forum/post", forum_para, "utf-8");
-		System.out.println("·¢Ìûºó·µ»ØÄÚÈİ=="+forum_post);
+
+		String forum_post = httpUtil.doFormPost("http://app.cainiaolc.com/forum/post", forum_para, "utf-8");
+		System.out.println("å‘å¸–åè¿”å›å†…å®¹=="+forum_post);
 		httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
 //		String coin_userSumary3 = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
 //		System.out.println(coin_userSumary3);
-		//»ñÈ¡Ëæ»úÌû×ÓµÄ»Ø¸´ÁĞ±í
+		//è·å–éšæœºå¸–å­çš„å›å¤åˆ—è¡¨
 		for (int i = 0; i < 2; i++) {
 			int contentID  =  random.nextInt(contentIDs.size());
 			Map<String,String> aclist = new HashMap<String, String>();
@@ -170,21 +171,26 @@ public class cnlc_flow {
 				JSONObject comment_json = (JSONObject) comment;
 				comments.add(comment_json.getString("content"));
 			}
-			//Ëæ»ú»ñÈ¡Ò»¸öÆÀÂÛ
+			//éšæœºè·å–ä¸€ä¸ªè¯„è®º
 			String comment = comments.get(random.nextInt(comments.size()));
-			System.out.println("Ëæ»ú»ñÈ¡µÄÆÀÂÛÄÚÈİ=="+comment);
-			//»ØÌû
+			System.out.println("éšæœºè·å–çš„è¯„è®ºå†…å®¹=="+comment);
+			//å›å¸–
 			Map<String,String> sub_comment = new HashMap<String, String>();
 			sub_comment.put("id", contentIDs.get(contentID));
 			sub_comment.put("cid", "");
 			sub_comment.put("refid", "");
 			sub_comment.put("content", comment);
 			String re_comment = httpUtil.doPost("http://app.cainiaolc.com/forum/comment", sub_comment, "utf-8");
-			System.out.println("»ØÌûºóµÄ×´Ì¬=="+re_comment);
+			System.out.println("å›å¸–åçš„çŠ¶æ€=="+re_comment);
 			httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
 		}
-		
-		
+		String replayCommentresult = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
+		JSONObject finaJson = JSONObject.parseObject(replayCommentresult);
+		Integer score = finaJson.getJSONObject("Data").getInteger("score");
+		System.out.println("æµç¨‹å®Œæ¯•åæœ€åçš„ç»“æœ==="+score);
+		OperateOracle operateOracle = new OperateOracle();
+		operateOracle.updateAppData("èœé¸Ÿç†è´¢",user.getUser_name(),user.getTelephone(),"",user.getPassword(),score,user.getCnuserID());
+
 	}
 	public void getIDs(String api_homeData,List<String> ids) {
 		JSONObject json1 = JSONObject.parseObject(api_homeData);
@@ -198,12 +204,12 @@ public class cnlc_flow {
 //		getJsonID(posts, ids);
 //		getJsonID(refers, ids);
 	}
-	
+
 	public void getJsonID(JSONArray  jsonArray,List<String> ids) {
-		for (Iterator iterator = jsonArray.iterator(); iterator.hasNext();) { 
-        	JSONObject job = (JSONObject) iterator.next(); 
-        	ids.add(job.get("id").toString());
-        }
+		for (Iterator iterator = jsonArray.iterator(); iterator.hasNext();) {
+			JSONObject job = (JSONObject) iterator.next();
+			ids.add(job.get("id").toString());
+		}
 	}
 	public List<String> getHistoryList(JSONArray  articles){
 		List<String> contentList = new ArrayList<String>();
@@ -215,8 +221,8 @@ public class cnlc_flow {
 		}
 		return contentList;
 	}
-	
-	
+
+
 	public List<String> getHistoryListWithCommentNum(JSONArray  articles){
 		List<String> contentIDs = new ArrayList<String>();
 		for (Object article : articles) {

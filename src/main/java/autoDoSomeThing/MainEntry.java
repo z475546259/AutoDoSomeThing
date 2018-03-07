@@ -8,8 +8,9 @@ public class MainEntry {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println("~~~~Ö÷º¯ÊıÔËĞĞÁË~~~");
+		System.out.println("~~~~ä¸»å‡½æ•°è¿è¡Œäº†~~~");
 		cnUser zzq1 = new cnUser();
+		zzq1.setUser_name("å¼ æ²»å¼º");
 		zzq1.setTelephone("15923584508");
 		zzq1.setPassword("d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");
 		zzq1.setCnuserID("2568");
@@ -17,72 +18,82 @@ public class MainEntry {
 		zzq1.setUser_agent("Dalvik/2.1.0 (Linux; U; Android 6.0.1; Redmi 4A MIUI/V8.5.4.0.MCCCNED)");
 //		zzq1.setAccept_secret("8eb478d177537ade7587bfafd52b1c9299e46c0a3881877469e6a5276e2a68d2");
 		cnUser zzq2 = new cnUser();
-		zzq2.setTelephone("17320413743");//ÂèÂèÓÃµÄµçĞÅ¿¨
+		zzq2.setUser_name("è’‹èƒ½ç");
+		zzq2.setTelephone("17320413743");//å¦ˆå¦ˆç”¨çš„ç”µä¿¡å¡
 		zzq2.setPassword("d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");
 		zzq2.setCnuserID("850152");
 		zzq1.setDeviceID("5ad2b13ddfdsf354");
 		zzq2.setUser_agent("Dalvik/2.1.0 (Linux; U; Android 6.0.0; Redmi 4A MIUI/V8.5.3.0.MCCCNED)");
 //		zzq2.setAccept_secret("8eb478d177537ade7587bfafd52b1c9299e46c0a3881877469e6a5276e2a68d2");
 		cnUser zzq3 = new cnUser();
-		zzq3.setTelephone("13512386223");//ÀÏÆÅÊÖ»úºÅ
+		zzq3.setUser_name("é©¬å‡¤æ˜¥");
+		zzq3.setTelephone("13512386223");//è€å©†æ‰‹æœºå·
 		zzq3.setPassword("d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");
 		zzq3.setCnuserID("850649");
 		zzq3.setDeviceID("db656fd41773b822");
 		zzq3.setUser_agent("Dalvik/1.6.0 (Linux; U; Android 4.4.4; HM 2A MIUI/7.11.16)");
 		cnUser zzq4 = new cnUser();
-		zzq4.setTelephone("15310088377");//ÀÏÆÅ¹«Ë¾ÊÖ»úºÅ
+		zzq4.setUser_name("é©¬å‡¤æ˜¥å…¬å¸");
+		zzq4.setTelephone("15310088377");//è€å©†å…¬å¸æ‰‹æœºå·
 		zzq4.setPassword("d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");
 		zzq4.setCnuserID("853034");
 		zzq4.setDeviceID("39902e20922d0ec3");
 		zzq4.setUser_agent("Dalvik/2.1.0 (Linux; U; Android 5.1; HUAWEI TAG-AL00 Build/HUAWEITAG-AL00)");
 		cnUser zzq5 = new cnUser();
-		zzq5.setTelephone("13512376362");//ÂèÂèÒÆ¶¯ÊÖ»úºÅ
+		zzq5.setUser_name("è’‹èƒ½çè€ç§»åŠ¨");
+		zzq5.setTelephone("13512376362");//å¦ˆå¦ˆç§»åŠ¨æ‰‹æœºå·
 		zzq5.setPassword("d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");
 		zzq5.setCnuserID("854372");
 		zzq5.setDeviceID("cd667fd538874d833");
 		zzq5.setUser_agent("Dalvik/2.1.0 (Linux; U; Android 5.1; HUAWEI TAG-AL00 Build/HUAWEITAG-AL00)");
 		cnUser zzq6 = new cnUser();
-		zzq6.setTelephone("15823270454");//°Ö°ÖÒÆ¶¯ÊÖ»úºÅ
+		zzq6.setUser_name("å¼ é¡ºå…ƒ");
+		zzq6.setTelephone("15823270454");//çˆ¸çˆ¸ç§»åŠ¨æ‰‹æœºå·
 		zzq6.setPassword("d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");
 		zzq6.setCnuserID("858732");
 		zzq6.setDeviceID("ef778fd649985f944");
 		zzq6.setUser_agent("Dalvik/2.1.0 (Linux; U; Android 5.0; HUAWEI TAG-AL00 Build/HUAWEITAG-AL00)");
 		cnUser zzq7 = new cnUser();
-		zzq7.setTelephone("18108303047");//ÎÒÓÃµÄµçĞÅÊÖ»úºÅ
+		zzq7.setUser_name("å¼ æ²»å¼ºç”µä¿¡");
+		zzq7.setTelephone("18108303047");//æˆ‘ç”¨çš„ç”µä¿¡æ‰‹æœºå·
 		zzq7.setPassword("d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");
 		zzq7.setCnuserID("879386");
 		zzq7.setDeviceID("776b965a7eba92d2");
 		zzq7.setUser_agent("Dalvik/2.1.0 (Linux; U; Android 6.0.1; OPPO R9sk Build/MMB29M)");
 		cnUser zzq8 = new cnUser();
-		zzq8.setTelephone("18723618976");//Áõ¸ÕÊÖ»úºÅ
+		zzq8.setUser_name("åˆ˜åˆš");
+		zzq8.setTelephone("18723618976");//åˆ˜åˆšæ‰‹æœºå·
 		zzq8.setPassword("d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");
 		zzq8.setCnuserID("872971");
 		zzq8.setDeviceID("887b965a7eba93e3");
 		zzq8.setUser_agent("Dalvik/2.1.0 (Linux; U; Android 6.0.1; OPPO R9sk Build/MMB29M)");
-		
+
 		cnUser zzq9 = new cnUser();
-		zzq9.setTelephone("15213114321");//ÂíÕÑÍ¨ÊÖ»úºÅ
+		zzq9.setUser_name("é©¬æ˜­é€š");
+		zzq9.setTelephone("15213114321");//é©¬æ˜­é€šæ‰‹æœºå·
 		zzq9.setPassword("d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");
 		zzq9.setCnuserID("922203");
 		zzq9.setDeviceID("fghk8fd6499855678");
 		zzq9.setUser_agent("Dalvik/2.1.0 (Linux; U; Android 5.0; HUAWEI TAG-AL00 Build/HUAWEITAG-AL00)");
-		
-		
+
+
 		cnUser zzq10 = new cnUser();
-		zzq10.setTelephone("18983825399");//Ğ¤µÂ»ªÕËºÅ
+		zzq10.setUser_name("è‚–å¾·å");
+		zzq10.setTelephone("18983825399");//è‚–å¾·åè´¦å·
 		zzq10.setPassword("d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");
 		zzq10.setCnuserID("922239");
 		zzq10.setDeviceID("rtdf8fd649985494");
 		zzq10.setUser_agent("Dalvik/2.1.0 (Linux; U; Android 5.0; HUAWEI TAG-AL00 Build/HUAWEITAG-AL00)");
-		
+
 		cnUser zzq11 = new cnUser();
-		zzq11.setTelephone("13922962046");//½¯½¨½­ÊÖ»úºÅ
+		zzq11.setUser_name("è’‹å»ºæ±Ÿ");
+		zzq11.setTelephone("13922962046");//è’‹å»ºæ±Ÿæ‰‹æœºå·
 		zzq11.setPassword("d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");
 		zzq11.setCnuserID("922404");
 		zzq11.setDeviceID("dfef6fd649932414");
 		zzq11.setUser_agent("Dalvik/2.1.0 (Linux; U; Android 5.0; HUAWEI TAG-AL00 Build/HUAWEITAG-AL00)");
-		
-		
+
+
 		cnlc_flow flow =  new cnlc_flow();
 		flow.autoDo(zzq1);
 		flow.autoDo(zzq2);
@@ -95,10 +106,10 @@ public class MainEntry {
 		flow.autoDo(zzq9);
 		flow.autoDo(zzq10);
 		flow.autoDo(zzq11);
-		//¾«Ã÷¹ºµÄ×Ô¶¯Ç©µ½
+		//ç²¾æ˜è´­çš„è‡ªåŠ¨ç­¾åˆ°
 		jmg_flow aa =  new jmg_flow();
 		aa.autoDo();
-		System.out.println("~~~~Ö÷º¯ÊıÍêÁË~~~");
+		System.out.println("~~~~ä¸»å‡½æ•°å®Œäº†~~~");
 	}
 
 }
