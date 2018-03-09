@@ -93,6 +93,14 @@ public class MainEntry {
 		zzq11.setDeviceID("dfef6fd649932414");
 		zzq11.setUser_agent("Dalvik/2.1.0 (Linux; U; Android 5.0; HUAWEI TAG-AL00 Build/HUAWEITAG-AL00)");
 
+		cnUser zzq12 = new cnUser();
+		zzq12.setUser_name("马凤春公司2");
+		zzq12.setTelephone("13983125011");//蒋建江手机号
+		zzq12.setPassword("d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");
+		zzq12.setCnuserID("946807");
+		zzq12.setDeviceID("qwer6fd649937485");
+		zzq12.setUser_agent("Dalvik/2.1.0 (Linux; U; Android 6.0; HUAWEI TAG-AL00 Build/HUAWEITAG-AL00)");
+
 
 		cnlc_flow flow =  new cnlc_flow();
 		flow.autoDo(zzq1);
@@ -106,6 +114,7 @@ public class MainEntry {
 		flow.autoDo(zzq9);
 		flow.autoDo(zzq10);
 		flow.autoDo(zzq11);
+		flow.autoDo(zzq12);
 		//精明购的自动签到
 		jmg_flow aa =  new jmg_flow();
 		aa.autoDo();
