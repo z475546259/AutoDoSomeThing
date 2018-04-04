@@ -1,5 +1,10 @@
 package util;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -9,6 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.zip.GZIPInputStream;
 
 import org.apache.http.Consts;
 import org.apache.http.Header;
@@ -22,6 +28,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.FormBodyPart;
 import org.apache.http.entity.mime.HttpMultipartMode;
@@ -258,4 +265,128 @@ public class HttpClientUtil {
         }
         return result;
     }
+    
+    
+    
+    public String doQuTouTiaoGet(String url,String charset){
+//      HttpClient httpClient = null;
+        HttpGet httpGet = null;
+        String result = null;
+        try{
+//          httpClient = new SSLClient();
+            httpGet = new HttpGet(url);
+
+            // 设置通用的请求属性
+    	  httpGet.addHeader("Accept-Encoding","gzip");
+          httpGet.addHeader("user-agent","qukan_android");
+	      httpGet.addHeader("Connection","Keep-Alive");
+	      httpGet.addHeader("Host","api.1sapp.com");
+            for(int i=0;i<cookies.size();i++){
+                httpGet.addHeader("Cookie", cookies.get(i));
+                System.out.println("已有cookie=="+cookies.get(i));
+            }
+
+            //璁剧疆鍙傛暟
+            HttpResponse response;
+            if(target==null){
+                response = httpClient.execute(httpGet);
+            }else{
+                response = httpClient.execute(target,httpGet);
+            }
+            if(response != null){
+                for(Header header:response.getAllHeaders() ){
+//        		System.out.println(header.getName()+"="+header.getValue());
+                    if(header.getName().equalsIgnoreCase("Set-Cookie")){
+                        cookies.add(header.getValue());
+                        System.out.println("cookie=="+header.getValue());
+                    }
+                }
+                HttpEntity resEntity = response.getEntity();
+                InputStream is = resEntity.getContent();
+                try{
+                    GZIPInputStream gzin = new GZIPInputStream(is);
+                    InputStreamReader isr = new InputStreamReader(gzin,"utf-8");
+                    result = Utils.getStringFromInputStreamReader(isr);
+                }catch (IOException exception){
+                    exception.printStackTrace();
+                }
+                httpGet.releaseConnection();
+            }
+        }catch(Exception ex){
+            ex.printStackTrace();
+            httpGet.releaseConnection();
+        }
+        return result;
+    }
+    /**
+     * 趣头条的post请求
+     * @param url
+     * @param map
+     * @param charset
+     * @return
+     */
+    public String doQuTouTiaoPost(String url,Map<String,String> map,String charset){
+//      HttpClient httpClient = null;
+      HttpPost httpPost = null;
+      String result = null;
+      try{
+//          httpClient = new SSLClient();
+          httpPost = new HttpPost(url);
+          // 设置通用的请求属性
+          httpPost.addHeader("Accept-Encoding","gzip");
+          httpPost.addHeader("user-agent","qukan_android");
+          httpPost.addHeader("Connection","Keep-Alive");
+          httpPost.addHeader("Host","api.1sapp.com");
+//          httpPost.addHeader("Content-Length", "556");
+          httpPost.addHeader("Content-Type","application/x-www-form-urlencoded");
+          //璁剧疆鍙傛暟
+          List<NameValuePair> list = new ArrayList<NameValuePair>();
+          Iterator iterator = map.entrySet().iterator();
+          while(iterator.hasNext()){
+              Entry<String,String> elem = (Entry<String, String>) iterator.next();
+              list.add(new BasicNameValuePair(elem.getKey(),elem.getValue()));
+          }
+          if(list.size() > 0){
+              UrlEncodedFormEntity entity = new UrlEncodedFormEntity(list,charset);
+              httpPost.setEntity(entity);
+          }
+          for(int i=0;i<cookies.size();i++){
+              httpPost.addHeader("Cookie", cookies.get(i));
+          }
+          HttpResponse response;
+          if(target==null){
+              response = httpClient.execute(httpPost);
+          }else{
+              response = httpClient.execute(target,httpPost);
+          }
+
+
+//
+          if(response != null){
+//          	System.out.println(response.getAllHeaders()[0].getName());
+              for(Header header:response.getAllHeaders() ){
+//          		System.out.println(header.getName()+"="+header.getValue());
+                  if(header.getName().equalsIgnoreCase("Set-Cookie")){
+                      cookies.add(header.getValue());
+                  }
+              }
+              HttpEntity resEntity = response.getEntity();
+              InputStream is = resEntity.getContent();
+              try{
+                  GZIPInputStream gzin = new GZIPInputStream(is);
+                  InputStreamReader isr = new InputStreamReader(gzin,"utf-8");
+                  result = Utils.getStringFromInputStreamReader(isr);
+              }catch (IOException exception){
+                  exception.printStackTrace();
+              }
+              httpPost.releaseConnection();
+          }
+      }catch(Exception ex){
+          ex.printStackTrace();
+          httpPost.releaseConnection();
+      }
+      return result;
+  }
+    
+   
 }
