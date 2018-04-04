@@ -101,6 +101,30 @@ public class MainEntry {
 		zzq12.setDeviceID("qwer6fd649937485");
 		zzq12.setUser_agent("Dalvik/2.1.0 (Linux; U; Android 6.0; HUAWEI TAG-AL00 Build/HUAWEITAG-AL00)");
 
+		cnUser zzq13 = new cnUser();
+		zzq13.setUser_name("王晓哲1");
+		zzq13.setTelephone("19908328046");//蒋建江手机号
+		zzq13.setPassword("d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");
+		zzq13.setCnuserID("966379");
+		zzq13.setDeviceID("qwer6fd649937435");
+		zzq13.setUser_agent("Dalvik/2.1.0 (Linux; U; Android 6.0; HUAWEI TAG-AL00 Build/HUAWEITAG-AL00)");
+		
+		
+		cnUser zzq14 = new cnUser();
+		zzq14.setUser_name("王晓哲2");
+		zzq14.setTelephone("15310674982");//蒋建江手机号
+		zzq14.setPassword("d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");
+		zzq14.setCnuserID("966374");
+		zzq14.setDeviceID("qwertfd649937485");
+		zzq14.setUser_agent("Dalvik/2.1.0 (Linux; U; Android 6.0.1; Redmi 4A MIUI/V8.5.4.0.MCCCNED)");
+		
+		cnUser zzq15 = new cnUser();
+		zzq15.setUser_name("王晓哲3");
+		zzq15.setTelephone("13042348192");//蒋建江手机号
+		zzq15.setPassword("d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");
+		zzq15.setCnuserID("966704");
+		zzq15.setDeviceID("wertyfd649937467");
+		zzq15.setUser_agent("Dalvik/2.1.0 (Linux; U; Android 6.0; HUAWEI TAG-AL00 Build/HUAWEITAG-AL00)");
 
 		cnlc_flow flow =  new cnlc_flow();
 		flow.autoDo(zzq1);
@@ -115,10 +139,12 @@ public class MainEntry {
 		flow.autoDo(zzq10);
 		flow.autoDo(zzq11);
 		flow.autoDo(zzq12);
+		flow.autoDo(zzq13);
+		flow.autoDo(zzq14);
+		flow.autoDo(zzq15);
 		//精明购的自动签到
 		jmg_flow aa =  new jmg_flow();
 		aa.autoDo();
 		System.out.println("~~~~主函数完了~~~");
 	}
-
 }
