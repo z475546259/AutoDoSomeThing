@@ -10,6 +10,22 @@ public class cnUser {
 
 	public String user_name;
 
+	public cnUser() {
+		super();
+	}
+
+	public cnUser(String telephone, String password, String cnuserID, String accept_secret, String deviceID,
+			String user_agent, String user_name) {
+		super();
+		this.telephone = telephone;
+		this.password = password;
+		this.cnuserID = cnuserID;
+		this.accept_secret = accept_secret;
+		this.deviceID = deviceID;
+		this.user_agent = user_agent;
+		this.user_name = user_name;
+	}
+
 	public String getUser_name() {
 		return user_name;
 	}
