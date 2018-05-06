@@ -18,9 +18,10 @@ import util.OperateOracle;
 public class cnlc_flow {
 	public static void main(String[] args) {
 		cnUser zzq2 = new cnUser();
-		zzq2.setTelephone("13922962046");
+		zzq2.setTelephone("15273878134");
 		zzq2.setPassword("d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");
-		zzq2.setCnuserID("922404");
+		zzq2.setCnuserID("987019");
+		zzq2.setUser_name("易码8");
 		cnlc_flow flow =  new cnlc_flow();
 		flow.autoDo(zzq2);
 //		HttpClientUtil aa =  new HttpClientUtil();
@@ -32,7 +33,7 @@ public class cnlc_flow {
 		Random random = new Random();
 		para.put("telephone", user.getTelephone());
 		para.put("password", user.getPassword());
-		httpUtil.setCnUserID(user.getCnuserID());
+		
 		httpUtil.setDeviceID(user.getDeviceID());
 		httpUtil.setUser_agent(user.getUser_agent());
 //		HttpHost target  = new HttpHost("192.168.1.4", 8888,  "http");
@@ -40,6 +41,9 @@ public class cnlc_flow {
 		//登录
 		String login_res = httpUtil.doPost("http://app.cainiaolc.com/user/login", para, "utf-8");
 		System.out.println("登录："+login_res);
+		String  cnUserID = JSONObject.parseObject(login_res).get("Data").toString();
+		httpUtil.setCnUserID(cnUserID);
+		user.setCnuserID(cnUserID);
 		//查看菜点
 		String coin_userSumary = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
 		System.out.println("金币："+coin_userSumary);
@@ -66,7 +70,7 @@ public class cnlc_flow {
 //		System.out.println(tag_history);
 		//主页
 		String api_homeData = httpUtil.doGet("http://app.cainiaolc.com/api/homeData", "utf-8");
-//		System.out.println(api_homeData);
+		System.out.println(api_homeData);
 		List<String> ids = new ArrayList<String>();
 		getIDs(api_homeData,ids);
 
@@ -92,6 +96,12 @@ public class cnlc_flow {
 		//分享文章
 		int first_id = 0;
 		for(int i=0;i<2;i++) {
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			//主页
 			api_homeData = httpUtil.doGet("http://app.cainiaolc.com/api/homeData", "utf-8");
 			System.out.println("为了分享访问主页"+api_homeData);
@@ -114,12 +124,7 @@ public class cnlc_flow {
 			System.out.println("第"+i+"次随机分享的文章ID是："+ ids.get(shareRandomId)+ " and "+share_result2);
 			String coin_userSumary5 = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
 			System.out.println(coin_userSumary5);
-			try {
-				Thread.sleep(15000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
 		}
 		//获取别人发帖内容列表
 		String article_list= httpUtil.doGet("http://app.cainiaolc.com/forum/list?page=1&perpage=1000&cate=225410&order=time", "utf-8");
@@ -150,7 +155,12 @@ public class cnlc_flow {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		String forum_post = httpUtil.doFormPost("http://app.cainiaolc.com/forum/post", forum_para, "utf-8");
 		System.out.println("发帖后返回内容=="+forum_post);
 		httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
@@ -158,6 +168,12 @@ public class cnlc_flow {
 //		System.out.println(coin_userSumary3);
 		//获取随机帖子的回复列表
 		for (int i = 0; i < 2; i++) {
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			int contentID  =  random.nextInt(contentIDs.size());
 			Map<String,String> aclist = new HashMap<String, String>();
 			aclist.put("id", contentIDs.get(contentID));
@@ -173,6 +189,14 @@ public class cnlc_flow {
 			}
 			//随机获取一个评论
 			String comment = comments.get(random.nextInt(comments.size()));
+			int exceptionTimes = 0;
+			while(comment.contains("谢谢分享")) {
+				comment = comments.get(random.nextInt(comments.size()));
+				if(exceptionTimes>3) {
+					comment = "特殊情况，凡事要辩证的看";
+				}
+				exceptionTimes++;
+			}
 			System.out.println("随机获取的评论内容=="+comment);
 			//回帖
 			Map<String,String> sub_comment = new HashMap<String, String>();
@@ -182,7 +206,10 @@ public class cnlc_flow {
 			sub_comment.put("content", comment);
 			String re_comment = httpUtil.doPost("http://app.cainiaolc.com/forum/comment", sub_comment, "utf-8");
 			System.out.println("回帖后的状态=="+re_comment);
+			String detail = httpUtil.doPost("http://app.cainiaolc.com/forum/detail", sub_comment, "utf-8");
+			System.out.println("回帖后查看状态=="+detail);
 			httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
+			
 		}
 		String replayCommentresult = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
 		JSONObject finaJson = JSONObject.parseObject(replayCommentresult);

@@ -30,7 +30,11 @@ public class CreateXML {
            Element elements = new Element("cnUser");       
            // 给 book 节点添加子节点并赋值；     
            elements.addContent(new Element("telephone").setText(users[i].getTelephone()).setAttribute("sss","sss"));    
-           elements.addContent(new Element("user_name").setText(users[i].getUser_name()));    
+           elements.addContent(new Element("user_name").setText(users[i].getUser_name()));   
+           elements.addContent(new Element("password").setText(users[i].getPassword()));
+           elements.addContent(new Element("cn_user_id").setText(users[i].getCnuserID()));
+           elements.addContent(new Element("device_id").setText(users[i].getDeviceID()));
+           elements.addContent(new Element("user_agent").setText(users[i].getUser_agent()));
            //    
            root.addContent(elements);    
        }    
