@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <cnUsers count="4" classfy="男人">
   <cnUser>
     <telephone sss="sss">15923584508</telephone>
@@ -95,15 +95,7 @@
     <cn_user_id>946807</cn_user_id>
     <device_id>qwer6fd649937485</device_id>
     <user_agent>Dalvik/2.1.0 (Linux; U; Android 6.0; HUAWEI TAG-AL00 Build/HUAWEITAG-AL00)</user_agent>
-  </cnUser>
-  <cnUser>
-    <telephone sss="sss">19908328046</telephone>
-    <user_name>王晓哲1</user_name>
-    <password>d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b</password>
-    <cn_user_id>966379</cn_user_id>
-    <device_id>qwer6fd649937435</device_id>
-    <user_agent>Dalvik/2.1.0 (Linux; U; Android 6.0; HUAWEI TAG-AL00 Build/HUAWEITAG-AL00)</user_agent>
-  </cnUser>
+  </cnUser> 
   <cnUser>
     <telephone sss="sss">15310674982</telephone>
     <user_name>王晓哲2</user_name>
@@ -143,6 +135,94 @@
     <cn_user_id>986664</cn_user_id>
     <device_id>8082e6712f9e2c7a</device_id>
     <user_agent>Dalvik/2.1.0 (Linux; U; Android 6.0.1; Redmi 4A MIUI/8.1.25)</user_agent>
+  </cnUser>
+  <cnUser>
+    <telephone sss="sss">13062730267</telephone>
+    <user_name>易码2</user_name>
+    <password>d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b</password>
+    <cn_user_id>986822</cn_user_id>
+    <device_id>1234e6712f9e2c7a</device_id>
+    <user_agent>Dalvik/2.1.0 (Linux; U; Android 6.0.1; Redmi 4A MIUI/8.1.26)</user_agent>
+  </cnUser>
+  <cnUser>
+    <telephone sss="sss">13284097108</telephone>
+    <user_name>易码3</user_name>
+    <password>d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b</password>
+    <cn_user_id>986921</cn_user_id>
+    <device_id>812346712f9e2c7a</device_id>
+    <user_agent>Dalvik/2.1.0 (Linux; U; Android 6.0.1; Redmi 4A MIUI/8.1.26)</user_agent>
+  </cnUser>
+  <cnUser>
+    <telephone sss="sss">18374269819</telephone>
+    <user_name>易码4</user_name>
+    <password>d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b</password>
+    <cn_user_id>986930</cn_user_id>
+    <device_id>801234712f9e2c7a</device_id>
+    <user_agent>Dalvik/2.1.0 (Linux; U; Android 6.0.1; Redmi 4A MIUI/8.1.26)</user_agent>
+  </cnUser>
+  <cnUser>
+    <telephone sss="sss">18473842017</telephone>
+    <user_name>易码5</user_name>
+    <password>d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b</password>
+    <cn_user_id>986937</cn_user_id>
+    <device_id>1234b13ddfdsf354</device_id>
+    <user_agent>Dalvik/1.6.0 (Linux; U; Android 4.4.4; HM 2A MIUI/7.11.16)</user_agent>
+  </cnUser>
+  <cnUser>
+    <telephone sss="sss">15526879974</telephone>
+    <user_name>易码6</user_name>
+    <password>d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b</password>
+    <cn_user_id>987019</cn_user_id>
+    <device_id>1234b13ddfdsf354</device_id>
+    <user_agent>Dalvik/1.6.0 (Linux; U; Android 4.4.4; HM 2A MIUI/7.11.16)</user_agent>
+  </cnUser>
+  <cnUser>
+    <telephone sss="sss">13089075750</telephone>
+    <user_name>易码7</user_name>
+    <password>d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b</password>
+    <cn_user_id>987025</cn_user_id>
+    <device_id>1234b13ddfds1234</device_id>
+    <user_agent>Dalvik/1.6.0 (Linux; U; Android 4.4.4; HM 2A MIUI/7.11.16)</user_agent>
+  </cnUser>
+  <cnUser>
+    <telephone sss="sss">15273878134</telephone>
+    <user_name>易码8</user_name>
+    <password>d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b</password>
+    <cn_user_id>987025</cn_user_id>
+    <device_id>12123413ddfdsf354</device_id>
+    <user_agent>Dalvik/1.6.0 (Linux; U; Android 4.4.4; HM 2A MIUI/7.11.16)</user_agent>
+  </cnUser>
+  <cnUser>
+    <telephone sss="sss">17096011425</telephone>
+    <user_name>易码9</user_name>
+    <password>d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b</password>
+    <cn_user_id>987025</cn_user_id>
+    <device_id>1212341234fdsf354</device_id>
+    <user_agent>Dalvik/2.1.0 (Linux; U; Android 5.1; HUAWEI TAG-AL00 Build/HUAWEITAG-AL00)</user_agent>
+  </cnUser>
+  <cnUser>
+    <telephone sss="sss">15243814203</telephone>
+    <user_name>易码10</user_name>
+    <password>d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b</password>
+    <cn_user_id>987025</cn_user_id>
+    <device_id>121234123sdsf354</device_id>
+    <user_agent>Dalvik/2.1.0 (Linux; U; Android 6.0.1; OPPO R9sk Build/MMB29M)</user_agent>
+  </cnUser>
+  <cnUser>
+    <telephone sss="sss">15243881685</telephone>
+    <user_name>易码11</user_name>
+    <password>d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b</password>
+    <cn_user_id>987025</cn_user_id>
+    <device_id>121234131234sf354</device_id>
+    <user_agent>Dalvik/1.6.0 (Linux; U; Android 4.4.4; HM 2A MIUI/7.11.16)</user_agent>
+  </cnUser>
+  <cnUser>
+    <telephone sss="sss">13269064962</telephone>
+    <user_name>易码12</user_name>
+    <password>d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b</password>
+    <cn_user_id>987025</cn_user_id>
+    <device_id>1212341234fdsf354</device_id>
+    <user_agent>Dalvik/2.1.0 (Linux; U; Android 5.1; HUAWEI TAG-AL00 Build/HUAWEITAG-AL00)</user_agent>
   </cnUser>
 </cnUsers>
 
