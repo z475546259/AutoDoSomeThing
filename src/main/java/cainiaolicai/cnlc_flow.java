@@ -18,10 +18,10 @@ import util.OperateOracle;
 public class cnlc_flow {
 	public static void main(String[] args) {
 		cnUser zzq2 = new cnUser();
-		zzq2.setTelephone("15273878134");
+		zzq2.setTelephone("15584178764");
 		zzq2.setPassword("d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");
 		zzq2.setCnuserID("987019");
-		zzq2.setUser_name("易码8");
+		zzq2.setUser_name("易码25");
 		cnlc_flow flow =  new cnlc_flow();
 		flow.autoDo(zzq2);
 //		HttpClientUtil aa =  new HttpClientUtil();
