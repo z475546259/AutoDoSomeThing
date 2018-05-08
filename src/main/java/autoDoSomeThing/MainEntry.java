@@ -10,6 +10,7 @@ import cainiaolicai.RecordToFile;
 import cainiaolicai.cnUser;
 import cainiaolicai.cnlc_flow;
 import jingminggou.jmg_flow;
+import util.OperateOracle;
 
 public class MainEntry {
 
@@ -20,11 +21,22 @@ public class MainEntry {
 		Long beginLongTime = c.getTimeInMillis();
 		String beginTime = sdf.format(c.getTime());
 		RecordToFile.record(new String[] {"菜鸟理财开始时间="+beginTime}, "countTime.txt");
+		
 		cnlc_flow flow =  new cnlc_flow();
-		List<cnUser> cnUsers = ListDom4J.turnDomtoCnUsers();
+//		List<cnUser> cnUsers = ListDom4J.turnDomtoCnUsers();
+		OperateOracle op = new OperateOracle();
+		List<cnUser> cnUsers = op.getCnUsers();
 		for (cnUser cnUser : cnUsers) {
-			flow.autoDo(cnUser);
+			try {
+				flow.autoDo(cnUser);
+			} catch (Exception e) {
+				e.printStackTrace();
+				RecordToFile.record(new String[] {"异常信息:("+cnUser.getUser_name()+cnUser.getTelephone()+")"+e.toString()}, "countTime.txt");
+				continue;
+			}
+			
 		}
+	
 		Calendar c2 = Calendar.getInstance();
 		Long endLongTime = c2.getTimeInMillis();
 		String endTime = sdf.format(c2.getTime());

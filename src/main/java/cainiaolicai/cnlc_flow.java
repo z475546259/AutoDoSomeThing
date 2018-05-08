@@ -14,14 +14,18 @@ import com.alibaba.fastjson.JSONObject;
 
 import util.HttpClientUtil;
 import util.OperateOracle;
+import util.Utils;
 
 public class cnlc_flow {
 	public static void main(String[] args) {
 		cnUser zzq2 = new cnUser();
-		zzq2.setTelephone("15584178764");
+		zzq2.setTelephone("15046351474");
+		zzq2.setUser_name("易码28");
 		zzq2.setPassword("d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");
-		zzq2.setCnuserID("987019");
-		zzq2.setUser_name("易码25");
+		zzq2.setDeviceID(Utils.randomHexString(16));
+		 Random random = new Random();
+	     int s = random.nextInt(Utils.user_agents.length);
+	     zzq2.setUser_agent(Utils.user_agents[s]);
 		cnlc_flow flow =  new cnlc_flow();
 		flow.autoDo(zzq2);
 //		HttpClientUtil aa =  new HttpClientUtil();
@@ -169,7 +173,7 @@ public class cnlc_flow {
 		//获取随机帖子的回复列表
 		for (int i = 0; i < 2; i++) {
 			try {
-				Thread.sleep(10000);
+				Thread.sleep(12000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -216,8 +220,8 @@ public class cnlc_flow {
 		Integer score = finaJson.getJSONObject("Data").getInteger("score");
 		System.out.println("流程完毕后最后的结果==="+score);
 		OperateOracle operateOracle = new OperateOracle();
-		operateOracle.updateAppData("菜鸟理财",user.getUser_name(),user.getTelephone(),"",user.getPassword(),score,user.getCnuserID());
-
+//		operateOracle.updateAppData("菜鸟理财",user.getUser_name(),user.getTelephone(),"",user.getPassword(),score,user.getCnuserID());
+		operateOracle.updateAppData("菜鸟理财",user,score);
 	}
 	public void getIDs(String api_homeData,List<String> ids) {
 		JSONObject json1 = JSONObject.parseObject(api_homeData);
