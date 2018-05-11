@@ -19,8 +19,8 @@ import util.Utils;
 public class cnlc_flow {
 	public static void main(String[] args) {
 		cnUser zzq2 = new cnUser();
-		zzq2.setTelephone("15046351474");
-		zzq2.setUser_name("易码28");
+		zzq2.setTelephone("13094757334");
+		zzq2.setUser_name("易码55");
 		zzq2.setPassword("d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");
 		zzq2.setDeviceID(Utils.randomHexString(16));
 		 Random random = new Random();
