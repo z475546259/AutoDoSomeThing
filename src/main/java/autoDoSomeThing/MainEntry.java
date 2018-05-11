@@ -5,15 +5,20 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import cainiaolicai.ListDom4J;
 import cainiaolicai.RecordToFile;
 import cainiaolicai.cnUser;
 import cainiaolicai.cnlc_flow;
 import jingminggou.jmg_flow;
 import util.OperateOracle;
+import util.ThreadPoolManager;
 
 public class MainEntry {
-
+	 private static final Logger LOGGER = LoggerFactory.getLogger("MultiZKListener.class");
+	    private static ThreadPoolManager threadPoolManager = ThreadPoolManager.getInstance("threadPoolManager");
 	public static void main(String[] args) {
 		System.out.println("~~~~主函数运行了~~~");
 		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
@@ -26,6 +31,21 @@ public class MainEntry {
 //		List<cnUser> cnUsers = ListDom4J.turnDomtoCnUsers();
 		OperateOracle op = new OperateOracle();
 		List<cnUser> cnUsers = op.getCnUsers();
+		
+		
+		
+		
+		
+		 String[] listenZKCenters = {"172.26.5.60:2181"};
+         ArrayList<String> arrayList = new ArrayList<>();
+         BlockingQueue<Runnable> queue = new ArrayBlockingQueue<>(1,true);
+         for (String zk:listenZKCenters) {
+             threadPoolManager.addTask(new Task(contextRefreshedEvent.getApplicationContext(),zk));
+         }
+		
+		
+		
+		
 		for (cnUser cnUser : cnUsers) {
 			try {
 				flow.autoDo(cnUser);
