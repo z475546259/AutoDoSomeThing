@@ -1,19 +1,29 @@
 package autoDoSomeThing;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import cainiaolicai.CnThread;
 import cainiaolicai.ListDom4J;
 import cainiaolicai.RecordToFile;
+import cainiaolicai.TestThread;
 import cainiaolicai.cnUser;
 import cainiaolicai.cnlc_flow;
 import jingminggou.jmg_flow;
 import util.OperateOracle;
+import util.ThreadPoolManager;
 
-public class MainEntry {
-
+public class MainEntry extends Thread{
+	 private static final Logger LOGGER = LoggerFactory.getLogger(MainEntry.class);
+	    private static ThreadPoolManager threadPoolManager = ThreadPoolManager.getInstance("threadPoolManager");
 	public static void main(String[] args) {
 		System.out.println("~~~~主函数运行了~~~");
 		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
@@ -26,17 +36,35 @@ public class MainEntry {
 //		List<cnUser> cnUsers = ListDom4J.turnDomtoCnUsers();
 		OperateOracle op = new OperateOracle();
 		List<cnUser> cnUsers = op.getCnUsers();
-		for (cnUser cnUser : cnUsers) {
-			try {
-				flow.autoDo(cnUser);
-			} catch (Exception e) {
-				e.printStackTrace();
-				RecordToFile.record(new String[] {"异常信息:("+cnUser.getUser_name()+cnUser.getTelephone()+")"+e.toString()}, "countTime.txt");
-				continue;
+         ArrayList<String> arrayList = new ArrayList<>();
+         BlockingQueue<Runnable> queue = new ArrayBlockingQueue<>(1,true);
+         System.out.println("添加任务数量="+cnUsers.size());
+         for (cnUser user : cnUsers){
+             threadPoolManager.addTask(new CnThread(user));
+         }
+    	 while(threadPoolManager.threadPool.getTaskCount()!=threadPoolManager.threadPool.getCompletedTaskCount()){
+        	 try {
+        		 System.out.println("11线程池还有未完成任务（总任务数："+threadPoolManager.threadPool.getTaskCount()+",已完成任务数："+threadPoolManager.threadPool.getCompletedTaskCount()+",活跃线程数："+threadPoolManager.threadPool.getActiveCount()
+        		+",线程池大小："+threadPoolManager.threadPool.getPoolSize()+",最大线程数："+threadPoolManager.threadPool.getMaximumPoolSize());
+        		 Thread.sleep(60000);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
-			
-		}
-	
+    	 }
+    	 threadPoolManager.threadPool.shutdown();
+    	 
+    	 while(!threadPoolManager.threadPool.isTerminated()){
+    		 System.out.println("等待线程池所有线程结束");
+    		 try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	 }
+		
+		
 		Calendar c2 = Calendar.getInstance();
 		Long endLongTime = c2.getTimeInMillis();
 		String endTime = sdf.format(c2.getTime());
@@ -46,5 +74,6 @@ public class MainEntry {
 		jmg_flow aa =  new jmg_flow();
 		aa.autoDo();
 		System.out.println("~~~~主函数完了~~~");
+		System.exit(0);
 	}
 }

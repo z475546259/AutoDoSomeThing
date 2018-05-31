@@ -19,9 +19,8 @@ import util.Utils;
 public class cnlc_flow {
 	public static void main(String[] args) {
 		cnUser zzq2 = new cnUser();
-		zzq2.setTelephone("18473879572");
-		zzq2.setUser_name("易码80");
-		zzq2.setPassword("d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");
+		zzq2.setTelephone("13214599790");
+		zzq2.setUser_name("易码296");		zzq2.setPassword("d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");
 		zzq2.setDeviceID(Utils.randomHexString(16));
 		 Random random = new Random();
 	     int s = random.nextInt(Utils.user_agents.length);
@@ -32,6 +31,17 @@ public class cnlc_flow {
 //		System.out.println(aa.doFormPost("http://app.cainiaolc.com/forum/post", new HashMap<String, String>(), "GB2312"));
 	}
 	public void autoDo(cnUser user){
+		if(user.getDeviceID()==null){
+			user.setDeviceID(Utils.randomHexString(16));
+		}
+		if(user.getUser_agent()==null){
+			 Random random = new Random();
+		     int s = random.nextInt(Utils.user_agents.length);
+		     user.setUser_agent(Utils.user_agents[s]);
+		}
+		if(user.getPassword()==null){
+		     user.setPassword("d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");;
+		}
 		HttpClientUtil httpUtil = new HttpClientUtil();
 		Map<String,String> para = new HashMap<String, String>();
 		Random random = new Random();
@@ -48,16 +58,25 @@ public class cnlc_flow {
 		String  cnUserID = JSONObject.parseObject(login_res).get("Data").toString();
 		httpUtil.setCnUserID(cnUserID);
 		user.setCnuserID(cnUserID);
-		//查看菜点
-		String coin_userSumary = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
-		System.out.println("金币："+coin_userSumary);
-		//进入APP
+		//打開app
 		para.clear();
 		para.put("version", "1.1.8");
 		para.put("w", "360");
 		para.put("h", "640");
-		String appOpen = httpUtil.doPost("http://app.cainiaolc.com/log/appOpen", para, "utf-8");
-		System.out.println("进入APP："+appOpen);
+		String appOpen_res = httpUtil.doPost("http://app.cainiaolc.com/log/appOpen", para, "utf-8");
+		System.out.println("打开app："+appOpen_res);
+		//查看菜点
+		String coin_userSumary = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
+		System.out.println("金币："+coin_userSumary);
+		Integer score =  JSONObject.parseObject(coin_userSumary).getJSONObject("Data").getInteger("score");
+		user.setScore(score);
+		//进入APP
+//		para.clear();
+//		para.put("version", "1.1.8");
+//		para.put("w", "360");
+//		para.put("h", "640");
+//		String appOpen = httpUtil.doPost("http://app.cainiaolc.com/log/appOpen", para, "utf-8");
+//		System.out.println("进入APP："+appOpen);
 		//绑定token
 		para.clear();
 		para.put("os", "android");
@@ -131,20 +150,48 @@ public class cnlc_flow {
 			
 		}
 		//获取别人发帖内容列表
-		String article_list= httpUtil.doGet("http://app.cainiaolc.com/forum/list?page=1&perpage=1000&cate=225410&order=time", "utf-8");
+		int[] cates_keys = {225410,225411,225412,225413,240756,467782};
+		Map<Integer,String> cates = new HashMap<>();
+		cates.put(225410, "p2p");
+		cates.put(225411, "fund");
+		cates.put(225412, "insurance");
+		cates.put(225413, "bank");
+		cates.put(240756, "ls");
+		cates.put(467782, "jjzt");
+		int select_cate = cates_keys[random.nextInt(cates_keys.length)];
+		String article_list= httpUtil.doGet("http://app.cainiaolc.com/forum/list?page=1&perpage=1000&cate="+select_cate+"&order=time", "utf-8");
+		System.out.println("获取帖子列表后："+article_list);
 		JSONObject json1 = JSONObject.parseObject(article_list);
 		JSONArray  articles = json1.getJSONArray("Data");
 		List<String> contentList = new ArrayList<String>();
 		List<String> contentIDs =  new ArrayList<String>();
-		for (Object article : articles) {
-			JSONObject article_json = (JSONObject) article;
-			if(!article_json.get("content").toString().contains("...")){
-				contentList.add(article_json.get("content").toString());
-			}
-			if(Integer.parseInt(article_json.get("commentNum").toString())>3){
-				contentIDs.add(article_json.get("id").toString());
+		if(articles!=null){
+			for (Object article : articles) {
+				JSONObject article_json = (JSONObject) article;
+				if(!article_json.get("content").toString().contains("...")){
+					contentList.add(article_json.get("content").toString());
+				}
+				if(Integer.parseInt(article_json.get("commentNum").toString())>=3){
+					contentIDs.add(article_json.get("id").toString());
+				}
 			}
 		}
+		//加上热门评论的帖子的id
+		String hot_artices_str= httpUtil.doGet("http://app.cainiaolc.com/forum/recommends?page=0&perpage=1000", "utf-8");
+		System.out.println("获取热门帖子列表后："+hot_artices_str);
+		JSONObject hot_artices = JSONObject.parseObject(hot_artices_str);
+		JSONArray  hotarticles = json1.getJSONArray("Data");
+		if(hotarticles!=null){
+			for (Object article : hotarticles) {
+				JSONObject article_json = (JSONObject) article;
+				if(Integer.parseInt(article_json.get("commentNum").toString())>=3){
+					if(!(article_json.get("authorInfo").equals("菜导")||article_json.get("cateLabel").equals("活捉菜导"))){
+						contentIDs.add(article_json.get("id").toString());
+					}
+				}
+			}
+		}
+		
 		System.out.println(contentList.size()+"-----"+contentIDs.size());
 //        发帖
 		String forum_content = contentList.get(random.nextInt(contentList.size()));
@@ -152,8 +199,8 @@ public class cnlc_flow {
 		Map<String,String> forum_para = new HashMap<String, String>();
 		try {
 			forum_para.put("content", forum_content);
-			forum_para.put("category", "p2p");
-			forum_para.put("cateId", "225410");
+			forum_para.put("category", cates.get(select_cate));
+			forum_para.put("cateId", select_cate+"");
 			forum_para.put("upload", "0");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -217,11 +264,13 @@ public class cnlc_flow {
 		}
 		String replayCommentresult = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
 		JSONObject finaJson = JSONObject.parseObject(replayCommentresult);
-		Integer score = finaJson.getJSONObject("Data").getInteger("score");
+		score = finaJson.getJSONObject("Data").getInteger("score");
 		System.out.println("流程完毕后最后的结果==="+score);
+		user.setEarn(score-user.getScore());
+		user.setScore(score);
 		OperateOracle operateOracle = new OperateOracle();
 //		operateOracle.updateAppData("菜鸟理财",user.getUser_name(),user.getTelephone(),"",user.getPassword(),score,user.getCnuserID());
-		operateOracle.updateAppData("菜鸟理财",user,score);
+		operateOracle.updateAppData("菜鸟理财",user);
 	}
 	public void getIDs(String api_homeData,List<String> ids) {
 		JSONObject json1 = JSONObject.parseObject(api_homeData);

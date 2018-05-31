@@ -7,9 +7,10 @@ public class cnUser {
 	public String accept_secret;
 	public String deviceID;
 	public String user_agent;
-
+	public int score;
+	public int earn;
 	public String user_name;
-
+	public String randomPwd;
 	public cnUser() {
 		super();
 	}
@@ -70,4 +71,29 @@ public class cnUser {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+	public int getEarn() {
+		return earn;
+	}
+
+	public void setEarn(int earn) {
+		this.earn = earn;
+	}
+
+	public String getRandomPwd() {
+		return randomPwd;
+	}
+
+	public void setRandomPwd(String randomPwd) {
+		this.randomPwd = randomPwd;
+	}
+	
 }

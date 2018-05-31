@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import cainiaolicai.RecordToFile;
 import cainiaolicai.cnUser;
 
 public class OperateOracle {
@@ -32,7 +33,7 @@ public class OperateOracle {
      * 向数据库插入 app薅羊毛 结果
      *
      */
-    public void AddData(String appName,cnUser user,Integer score) {
+    public void AddData(String appName,cnUser user) {
         connection = getConnection();
         // String sql =
         // "insert into student values('1','王小军','1','17','北京市和平里七区30号楼7门102')";
@@ -47,7 +48,7 @@ public class OperateOracle {
             pstm.setString(3, user.getTelephone());
             pstm.setString(4, "email");
             pstm.setString(5, user.getPassword());
-            pstm.setInt(6, score);
+            pstm.setInt(6, user.getScore());
             pstm.setString(7, user.getCnuserID());
             pstm.setString(8, user.getDeviceID());
             pstm.setString(9, user.getUser_agent());
@@ -62,21 +63,23 @@ public class OperateOracle {
      * 更新菜鸟理财 app薅羊毛 结果
      *
      */
-    public void updateCaiNiaoLiCaiData(String appName,cnUser user,Integer score) {
+    public void updateCaiNiaoLiCaiData(String appName,cnUser user) {
         connection = getConnection();
         // String sql =
         // "insert into student values('1','王小军','1','17','北京市和平里七区30号楼7门102')";
 //        String sql = "select count(*) from student where 1 = 1";
-        String sqlStr = "UPDATE APP_AUTODO_RESULT set app_userscore=? , device_id=? , user_agent=?  where app_name= ? and app_usertel =?";
+        String sqlStr = "UPDATE APP_AUTODO_RESULT set app_userscore=? , device_id=? , user_agent=? ,earn=?,app_userid=? where app_name= ? and app_usertel =?";
 
         try {
             // 执行插入数据操作,
             pstm = connection.prepareStatement(sqlStr);
-            pstm.setInt(1, score);
+            pstm.setInt(1, user.getScore());
             pstm.setString(2, user.getDeviceID());
             pstm.setString(3, user.getUser_agent());
-            pstm.setString(4, appName);
-            pstm.setString(5, user.getTelephone());
+            pstm.setInt(4, user.earn);
+            pstm.setString(5, user.getCnuserID());
+            pstm.setString(6, appName);
+            pstm.setString(7, user.getTelephone());
            
             pstm.executeUpdate();
         } catch (SQLException e) {
@@ -86,52 +89,13 @@ public class OperateOracle {
         }
     }
 
-//    /**
-//     * 更新 app薅羊毛数据，先查询有次记录没有 否则 插入
-//     * @param appName
-//     * @param appUserName
-//     * @param appUserTel
-//     * @param appUserEmail
-//     * @param appUserPassword
-//     * @param appUserScore
-//     * @param appUserId
-//     */
-//    public void updateAppData(String appName,String appUserName,String appUserTel,String appUserEmail,String appUserPassword,Integer appUserScore,String appUserId){
-//        connection = getConnection();
-//        String sqlStr = "select count(1) count from APP_AUTODO_RESULT where app_name =? and app_usertel = ? ";
-//        try {
-//            // 执行插入数据操作
-//            pstm = connection.prepareStatement(sqlStr);
-//            pstm.setString(1, appName);
-//            pstm.setString(2, appUserTel);
-////            pstm.setString(3, appUserTel);
-////            pstm.setString(4, appUserEmail);
-////            pstm.setString(5, appUserPassword);
-////            pstm.setString(6, appUserId);
-//            System.out.println(pstm.toString());
-//            rs = pstm.executeQuery();
-//            int count = 0;
-//            while (rs.next()){
-//                count =  rs.getInt("count");
-//            }
-//            if(count==0){
-//                AddData( appName, appUserName, appUserTel, appUserEmail, appUserPassword, appUserScore, appUserId);
-//            }else if(count!=0){
-//                updateCaiNiaoLiCaiData( appName, appUserName, appUserTel, appUserEmail, appUserPassword, appUserScore, appUserId);
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        } finally {
-//            ReleaseResource();
-//        }
-//    }
     
     /**
      * 更新 app薅羊毛数据，先查询有次记录没有 否则 插入
      * @param appName
      * @param cnUser
      */
-    public void updateAppData(String appName,cnUser user,Integer score){
+    public void updateAppData(String appName,cnUser user){
         connection = getConnection();
         String sqlStr = "select count(1) count from APP_AUTODO_RESULT where app_name =? and app_usertel = ? ";
         try {
@@ -150,9 +114,9 @@ public class OperateOracle {
                 count =  rs.getInt("count");
             }
             if(count==0){
-                AddData( appName, user,score);
+                AddData( appName, user);
             }else if(count!=0){
-                updateCaiNiaoLiCaiData( appName, user,score);
+                updateCaiNiaoLiCaiData( appName, user);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -322,7 +286,7 @@ public class OperateOracle {
     public List<cnUser> getCnUsers(){
     	List<cnUser> cnUsers = new ArrayList<cnUser>();
     	 connection = getConnection();
-         String sql = "select * from app_autodo_result where is_del = 0";
+         String sql = "select * from app_autodo_result where is_del = 0 ";
          try {
              pstm = connection.prepareStatement(sql);
              rs = pstm.executeQuery();
@@ -354,4 +318,86 @@ public class OperateOracle {
          }
     	return cnUsers;
     }
+    
+    
+    
+    /**
+     * 从数据库取出需要修改密码的user
+     */
+    public List<cnUser> getChangePwdUsers(int blankNum){
+    	List<cnUser> cnUsers = new ArrayList<cnUser>();
+    	 connection = getConnection();
+         String sql = "select t1.*"+
+        		 		" from (select rownum rn, a.* from APP_AUTODO_RESULT a order by id asc) t1,"+
+        		 		" (select rownum rn, b.* from APP_AUTODO_RESULT b order by id asc) t2"+
+        		 		" where t1.app_userpassword = t2.app_userpassword"+
+        		 		" and abs(t1.app_userid - t2.app_userid) < ?"+
+        		 		" and mod(t1.rn, 2) = 1"+
+        		 		" and t1.rn = t2.rn - 1";
+         try {
+             pstm = connection.prepareStatement(sql);
+             pstm.setInt(1, blankNum);
+             System.out.println(sql);
+             rs = pstm.executeQuery();
+             while (rs.next()) {
+            	 cnUser user =  new cnUser();
+            	 user.setUser_name(rs.getString("APP_USERNAME"));
+            	 user.setTelephone(rs.getString("APP_USERTEL"));
+            	 user.setCnuserID(rs.getString("APP_USERID"));
+            	 user.setPassword(rs.getString("APP_USERPASSWORD"));
+            	 user.setRandomPwd(rs.getString("PASSWORD"));
+            	 if(rs.getString("DEVICE_ID")==""||rs.getString("DEVICE_ID")==null) {
+            		 user.setDeviceID(Utils.randomHexString(16));
+            	 }else {
+            		 user.setDeviceID(rs.getString("DEVICE_ID"));
+            	 }
+            	 
+            	 if(rs.getString("USER_AGENT")==""||rs.getString("USER_AGENT")==null) {
+            		 Random random = new Random();
+            	     int s = random.nextInt(Utils.user_agents.length);
+            		 user.setUser_agent(Utils.user_agents[s]);
+            	 }else {
+            		 user.setUser_agent(rs.getString("USER_AGENT"));
+            	 }
+                 cnUsers.add(user);
+             }
+         } catch (SQLException e) {
+             e.printStackTrace();
+         } finally {
+             ReleaseResource();
+         }
+    	return cnUsers;
+    }
+    
+    
+    /**
+     * 更新菜鸟理财 app薅羊毛 密码
+     *
+     */
+    public boolean updatePwd(cnUser user) {
+    	Boolean flag = false;
+        connection = getConnection();
+        // String sql =
+        // "insert into student values('1','王小军','1','17','北京市和平里七区30号楼7门102')";
+//        String sql = "select count(*) from student where 1 = 1";
+        String sqlStr = "UPDATE APP_AUTODO_RESULT set app_userpassword=? , password =? where app_name= '菜鸟理财' and app_usertel =?";
+
+        try {
+            // 执行插入数据操作,
+            pstm = connection.prepareStatement(sqlStr);
+            pstm.setString(1, user.getPassword());
+            pstm.setString(2, user.getRandomPwd());
+            pstm.setString(3, user.getTelephone());
+           
+            pstm.executeUpdate();
+            flag = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            
+        } finally {
+            ReleaseResource();
+        }
+        return flag;
+    }
+    
 }
