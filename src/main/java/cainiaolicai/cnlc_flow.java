@@ -1,11 +1,6 @@
 package cainiaolicai;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 import org.apache.http.HttpHost;
 
@@ -19,8 +14,8 @@ import util.Utils;
 public class cnlc_flow {
 	public static void main(String[] args) {
 		cnUser zzq2 = new cnUser();
-		zzq2.setTelephone("13214599790");
-		zzq2.setUser_name("易码296");		zzq2.setPassword("d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");
+		zzq2.setTelephone("15025199880");
+		zzq2.setUser_name("易码400");		zzq2.setPassword("d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");
 		zzq2.setDeviceID(Utils.randomHexString(16));
 		 Random random = new Random();
 	     int s = random.nextInt(Utils.user_agents.length);
@@ -164,7 +159,8 @@ public class cnlc_flow {
 		JSONObject json1 = JSONObject.parseObject(article_list);
 		JSONArray  articles = json1.getJSONArray("Data");
 		List<String> contentList = new ArrayList<String>();
-		List<String> contentIDs =  new ArrayList<String>();
+//		List<String> contentIDs =  new ArrayList<String>();
+		Set<String> contentIDs = new HashSet<>();
 		if(articles!=null){
 			for (Object article : articles) {
 				JSONObject article_json = (JSONObject) article;
@@ -227,7 +223,8 @@ public class cnlc_flow {
 			}
 			int contentID  =  random.nextInt(contentIDs.size());
 			Map<String,String> aclist = new HashMap<String, String>();
-			aclist.put("id", contentIDs.get(contentID));
+//			aclist.put("id", contentIDs.get(contentID));
+			aclist.put("id", getRandomElement(contentIDs));
 			aclist.put("perpage", "100");
 			aclist.put("page", "0");
 			String content_comments = httpUtil.doPost("http://app.cainiaolc.com/forum/aclist", aclist, "utf-8");
@@ -251,7 +248,10 @@ public class cnlc_flow {
 			System.out.println("随机获取的评论内容=="+comment);
 			//回帖
 			Map<String,String> sub_comment = new HashMap<String, String>();
-			sub_comment.put("id", contentIDs.get(contentID));
+//			sub_comment.put("id", contentIDs.get(contentID));
+			String postId = getRandomElement(contentIDs);
+			sub_comment.put("id", postId);
+			contentIDs.remove(postId);
 			sub_comment.put("cid", "");
 			sub_comment.put("refid", "");
 			sub_comment.put("content", comment);
@@ -313,4 +313,42 @@ public class cnlc_flow {
 		}
 		return contentIDs;
 	}
+	private static Random random;
+	//双重校验锁获取一个Random单例
+	public static Random getRandom() {
+		if(random==null){
+			synchronized (cnlc_flow.class) {
+				if(random==null){
+					random =new Random();
+				}
+			}
+		}
+
+		return random;
+	}
+	/**
+	 * 获得一个[0,max)之间的整数。
+	 * @param max
+	 * @return
+	 */
+	public static int getRandomInt(int max) {
+		return Math.abs(getRandom().nextInt())%max;
+	}
+	/**
+	 * 从set中随机取得一个元素
+	 * @param set
+	 * @return
+	 */
+	public static <E> E getRandomElement(Set<E> set){
+		int rn = getRandomInt(set.size());
+		int i = 0;
+		for (E e : set) {
+			if(i==rn){
+				return e;
+			}
+			i++;
+		}
+		return null;
+	}
 }
+
