@@ -22,7 +22,7 @@ public class BatchChangePwd {
 		// TODO Auto-generated method stub
 		//取出需要修改密码的user
 		OperateOracle op = new OperateOracle();
-		List<cnUser> cnUsers = op.getChangePwdUsers(4);
+		List<cnUser> cnUsers = op.getChangePwdUsers(7);
 		BatchChangePwd batchChangePwd = new BatchChangePwd();
 		for (cnUser cnUser : cnUsers) {
 			batchChangePwd.changePwdFlow(cnUser);

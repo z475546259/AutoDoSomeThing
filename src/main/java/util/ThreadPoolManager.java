@@ -22,7 +22,7 @@ public class ThreadPoolManager {
     /**
      *  线程池维护线程的最少数量
      */
-    private final static int CORE_POOL_SIZE = 4;
+    private final static int CORE_POOL_SIZE = 5;
     /**
      * 线程池维护线程的最大数量
      */
@@ -34,7 +34,7 @@ public class ThreadPoolManager {
     /**
      * 线程池所使用的缓冲队列大小
      */
-    private final static int WORK_QUEUE_SIZE = 10000;
+    private final static int WORK_QUEUE_SIZE = 1000;
     /**
      * 请求Request缓冲队列
      */

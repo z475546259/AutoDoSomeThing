@@ -332,7 +332,7 @@ public class OperateOracle {
         		 		" (select rownum rn, b.* from APP_AUTODO_RESULT b order by id asc) t2"+
         		 		" where t1.app_userpassword = t2.app_userpassword"+
         		 		" and abs(t1.app_userid - t2.app_userid) < ?"+
-        		 		" and mod(t1.rn, 2) = 1"+
+        		 		" and mod(t1.rn, 2) = 0"+
         		 		" and t1.rn = t2.rn - 1";
          try {
              pstm = connection.prepareStatement(sql);

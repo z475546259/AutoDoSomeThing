@@ -14,8 +14,8 @@ import util.Utils;
 public class cnlc_flow {
 	public static void main(String[] args) {
 		cnUser zzq2 = new cnUser();
-		zzq2.setTelephone("15025199880");
-		zzq2.setUser_name("易码400");		zzq2.setPassword("d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");
+		zzq2.setTelephone("15984940473");
+		zzq2.setUser_name("易码500");		zzq2.setPassword("d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");
 		zzq2.setDeviceID(Utils.randomHexString(16));
 		 Random random = new Random();
 	     int s = random.nextInt(Utils.user_agents.length);
@@ -173,10 +173,15 @@ public class cnlc_flow {
 			}
 		}
 		//加上热门评论的帖子的id
-		String hot_artices_str= httpUtil.doGet("http://app.cainiaolc.com/forum/recommends?page=0&perpage=1000", "utf-8");
+//		String hot_artices_str= httpUtil.doGet("http://app.cainiaolc.com/forum/recommends?page=0&perpage=1000", "utf-8");
+		int[] recommends_keys = {225410,225411,467782};
+		int recommends_cate = recommends_keys[random.nextInt(recommends_keys.length)];
+		String hot_artices_str= httpUtil.doGet("http://app.cainiaolc.com/forum/recommends?page=1&perpage=200&cate="+recommends_cate, "utf-8");
+		
+		 
 		System.out.println("获取热门帖子列表后："+hot_artices_str);
 		JSONObject hot_artices = JSONObject.parseObject(hot_artices_str);
-		JSONArray  hotarticles = json1.getJSONArray("Data");
+		JSONArray  hotarticles = hot_artices.getJSONArray("Data");
 		if(hotarticles!=null){
 			for (Object article : hotarticles) {
 				JSONObject article_json = (JSONObject) article;
