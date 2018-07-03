@@ -19,8 +19,13 @@ public class CnThread implements Runnable{
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		cnlc_flow flow = new cnlc_flow();
-		flow.autoDo(user);
+		try {
+			cnlc_flow flow = new cnlc_flow();
+			flow.autoDo(user);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("线程报错了，捕获");
+		}
 //		Thread.currentThread().notifyAll();
 	}
 	
