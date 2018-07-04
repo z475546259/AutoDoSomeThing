@@ -24,7 +24,7 @@ public class CnThread implements Runnable{
 			flow.autoDo(user);
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println("线程报错了，捕获");
+			System.out.println("线程报错了，捕获："+e.getMessage());
 		}
 //		Thread.currentThread().notifyAll();
 	}
