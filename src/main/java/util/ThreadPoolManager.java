@@ -22,7 +22,7 @@ public class ThreadPoolManager {
     /**
      *  线程池维护线程的最少数量
      */
-    private final static int CORE_POOL_SIZE = 8;
+    private final static int CORE_POOL_SIZE = 4;
     /**
      * 线程池维护线程的最大数量
      */
