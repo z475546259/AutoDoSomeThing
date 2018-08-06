@@ -89,25 +89,25 @@ public class cnlc_flow {
 		//打标历史
 		String tag_history = httpUtil.doGet("http://app.cainiaolc.com/user/tagHistory", "utf-8");
 //		System.out.println(tag_history);
-//		//主页
-//		String api_homeData = httpUtil.doGet("http://app.cainiaolc.com/api/homeData", "utf-8");
-//		System.out.println(api_homeData);
-//		List<String> ids = new ArrayList<String>();
-//		getIDs(api_homeData,ids);
-//
-//		for (String id : ids) {
-//			//查看文章
-//			String article_detailSimple = httpUtil.doGet("http://app.cainiaolc.com/article/detailSimple?id="+id, "utf-8");
-////    		System.out.println(article_detailSimple);
-//			String coin_userSumary2 = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
-////    		System.out.println(coin_userSumary2);
-//			try {
-//				Thread.sleep(10000);
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
+		//主页
+		String api_homeData = httpUtil.doGet("http://app.cainiaolc.com/api/homeData", "utf-8");
+		System.out.println(api_homeData);
+		List<String> ids = new ArrayList<String>();
+		getIDs(api_homeData,ids);
+
+		for (String id : ids) {
+			//查看文章
+			String article_detailSimple = httpUtil.doGet("http://app.cainiaolc.com/article/detailSimple?id="+id, "utf-8");
+//    		System.out.println(article_detailSimple);
+			String coin_userSumary2 = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
+//    		System.out.println(coin_userSumary2);
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 //		//收藏文章
 //		int randomId = (new Random()).nextInt(ids.size());
 //		String article_detailSimple = httpUtil.doGet("http://app.cainiaolc.com/article/favor?id="+ids.get(randomId)+"&status=1", "utf-8");
@@ -115,38 +115,38 @@ public class cnlc_flow {
 //		String coin_userSumary4 = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
 //		System.out.println(coin_userSumary4);
 //		//分享文章
-//		int first_id = 0;
-//		for(int i=0;i<2;i++) {
-//			try {
-//				Thread.sleep(10000);
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			//主页
-//			api_homeData = httpUtil.doGet("http://app.cainiaolc.com/api/homeData", "utf-8");
-//			System.out.println("为了分享访问主页"+api_homeData);
-//			int shareRandomId = random.nextInt(ids.size());
-//			while(shareRandomId==first_id){
-//				shareRandomId = random.nextInt(ids.size());
-//			}
-//			first_id = shareRandomId;
-//			String article_detailSimple2 = httpUtil.doGet("http://app.cainiaolc.com/article/detailSimple?id="+ids.get(shareRandomId), "utf-8");
-//			System.out.println(article_detailSimple2);
-//			Map<String,String> share = new HashMap<String, String>();
-////      			System.out.println(ids.get(shareRandomId));
-//			share.put("path", "/articleShare");
-//			share.put("referer", "/article/"+ids.get(shareRandomId));
-//			String share_result1 = httpUtil.doPost("http://app.cainiaolc.com/log/menuClick", share, "utf-8");
-//			share.clear();
-//			share.put("fk", ids.get(shareRandomId));
-//			share.put("type", "7");
-//			String share_result2 = httpUtil.doPost("http://app.cainiaolc.com/log/articleShare", share, "utf-8");
-//			System.out.println("第"+i+"次随机分享的文章ID是："+ ids.get(shareRandomId)+ " and "+share_result2);
-//			String coin_userSumary5 = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
-//			System.out.println(coin_userSumary5);
-//			
-//		}
+		int first_id = 0;
+		for(int i=0;i<2;i++) {
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//主页
+			api_homeData = httpUtil.doGet("http://app.cainiaolc.com/api/homeData", "utf-8");
+			System.out.println("为了分享访问主页"+api_homeData);
+			int shareRandomId = random.nextInt(ids.size());
+			while(shareRandomId==first_id){
+				shareRandomId = random.nextInt(ids.size());
+			}
+			first_id = shareRandomId;
+			String article_detailSimple2 = httpUtil.doGet("http://app.cainiaolc.com/article/detailSimple?id="+ids.get(shareRandomId), "utf-8");
+			System.out.println(article_detailSimple2);
+			Map<String,String> share = new HashMap<String, String>();
+//      			System.out.println(ids.get(shareRandomId));
+			share.put("path", "/articleShare");
+			share.put("referer", "/article/"+ids.get(shareRandomId));
+			String share_result1 = httpUtil.doPost("http://app.cainiaolc.com/log/menuClick", share, "utf-8");
+			share.clear();
+			share.put("fk", ids.get(shareRandomId));
+			share.put("type", "7");
+			String share_result2 = httpUtil.doPost("http://app.cainiaolc.com/log/articleShare", share, "utf-8");
+			System.out.println("第"+i+"次随机分享的文章ID是："+ ids.get(shareRandomId)+ " and "+share_result2);
+			String coin_userSumary5 = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
+			System.out.println(coin_userSumary5);
+
+		}
 //		//获取别人发帖内容列表
 //		int[] cates_keys = {225410,225411,225412,225413,240756,467782};
 //		Map<Integer,String> cates = new HashMap<>();
@@ -192,8 +192,8 @@ public class cnlc_flow {
 //			e1.printStackTrace();
 //		}
 //		String hot_artices_str= httpUtil.doGet("http://app.cainiaolc.com/forum/recommends?page=1&perpage=200&cate="+recommends_cate, "utf-8");
-//		
-//		 
+//
+//
 //		System.out.println("获取热门帖子列表后："+hot_artices_str);
 //		JSONObject hot_artices = JSONObject.parseObject(hot_artices_str);
 //		JSONArray  hotarticles = hot_artices.getJSONArray("Data");
@@ -207,7 +207,7 @@ public class cnlc_flow {
 //				}
 //			}
 //		}
-//		
+//
 //		System.out.println(contentList.size()+"-----"+contentIDs.size());
 ////        发帖
 //		if(contentList.size()!=0){
