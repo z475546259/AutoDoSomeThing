@@ -11,6 +11,15 @@ public class cnUser {
 	public int earn;
 	public String user_name;
 	public String randomPwd;
+	public String codeMine;
+	public String getCodeMine() {
+		return codeMine;
+	}
+
+	public void setCodeMine(String codeMine) {
+		this.codeMine = codeMine;
+	}
+
 	public cnUser() {
 		super();
 	}

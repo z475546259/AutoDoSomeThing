@@ -52,7 +52,8 @@ public class OperateOracle {
             pstm.setString(7, user.getCnuserID());
             pstm.setString(8, user.getDeviceID());
             pstm.setString(9, user.getUser_agent());
-            pstm.executeUpdate();
+//            pstm.executeUpdate();
+            pstm.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -68,7 +69,7 @@ public class OperateOracle {
         // String sql =
         // "insert into student values('1','王小军','1','17','北京市和平里七区30号楼7门102')";
 //        String sql = "select count(*) from student where 1 = 1";
-        String sqlStr = "UPDATE APP_AUTODO_RESULT set app_userscore=? , device_id=? , user_agent=? ,earn=?,app_userid=? where app_name= ? and app_usertel =?";
+        String sqlStr = "UPDATE APP_AUTODO_RESULT set app_userscore=? , device_id=? , user_agent=? ,earn=?,app_userid=? ,code_mine=? where app_name= ? and app_usertel =?";
 
         try {
             // 执行插入数据操作,
@@ -78,8 +79,9 @@ public class OperateOracle {
             pstm.setString(3, user.getUser_agent());
             pstm.setInt(4, user.earn);
             pstm.setString(5, user.getCnuserID());
-            pstm.setString(6, appName);
-            pstm.setString(7, user.getTelephone());
+            pstm.setString(6, user.getCodeMine());
+            pstm.setString(7, appName);
+            pstm.setString(8, user.getTelephone());
            
             pstm.executeUpdate();
         } catch (SQLException e) {
