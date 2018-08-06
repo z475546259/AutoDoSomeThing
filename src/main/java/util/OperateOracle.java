@@ -288,7 +288,7 @@ public class OperateOracle {
     public List<cnUser> getCnUsers(){
     	List<cnUser> cnUsers = new ArrayList<cnUser>();
     	 connection = getConnection();
-         String sql = "select * from app_autodo_result where is_del = 0 ";
+         String sql = "select * from app_autodo_result where is_del = 0 where app_name='菜鸟理财'";
          try {
              pstm = connection.prepareStatement(sql);
              rs = pstm.executeQuery();
