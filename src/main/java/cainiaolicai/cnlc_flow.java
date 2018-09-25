@@ -15,7 +15,7 @@ import util.Utils;
 public class cnlc_flow {
 	public static void main(String[] args) {
 		cnUser zzq2 = new cnUser();
-		zzq2.setTelephone("15984940473");
+		zzq2.setTelephone("15144584420");
 		zzq2.setUser_name("易码500");		zzq2.setPassword("d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");
 		zzq2.setDeviceID(Utils.randomHexString(16));
 		 Random random = new Random();
@@ -65,6 +65,8 @@ public class cnlc_flow {
 		String coin_userSumary = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
 		System.out.println("金币："+coin_userSumary);
 		Integer score =  JSONObject.parseObject(coin_userSumary).getJSONObject("Data").getInteger("score");
+		Integer beginScore =  user.getScore();
+		System.out.println("登录后的奖励是=="+(score-user.getScore()));
 		user.setScore(score);
 		//进入APP
 //		para.clear();
@@ -102,7 +104,7 @@ public class cnlc_flow {
 			httpUtil.doGet("http://app.cainiaolc.com/article/detailSimple?id="+id, "utf-8");
 			httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
 			try {
-				Thread.sleep(10000);
+				Thread.sleep(12000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -110,12 +112,18 @@ public class cnlc_flow {
 		}
 		//收藏文章 如果userID尾数与星期相同就收藏文章
 		int xq = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
-		if(Integer.parseInt(cnUserID)%10==xq){
+		if(Integer.parseInt(cnUserID)%7!=xq){
 			int randomId = (new Random()).nextInt(ids.size());
 			String article_detailSimple = httpUtil.doGet("http://app.cainiaolc.com/article/favor?id="+ids.get(randomId)+"&status=1", "utf-8");
 			System.out.println(article_detailSimple);
 			String coin_userSumary4 = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
 			System.out.println(coin_userSumary4);
+			//查看菜点
+			coin_userSumary = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
+			System.out.println("金币："+coin_userSumary);
+			score =  JSONObject.parseObject(coin_userSumary).getJSONObject("Data").getInteger("score");
+			System.out.println("收藏文章后的奖励是=="+(score-user.getScore()));
+			user.setScore(score);
 		}
 		//分享文章
 		int first_id = 0;
@@ -150,7 +158,11 @@ public class cnlc_flow {
 			System.out.println(coin_userSumary5);
 
 		}
-
+		coin_userSumary = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
+		System.out.println("金币："+coin_userSumary);
+		score =  JSONObject.parseObject(coin_userSumary).getJSONObject("Data").getInteger("score");
+		System.out.println("分享文章后的奖励是=="+(score-user.getScore()));
+		user.setScore(score);
 
 
 
@@ -192,6 +204,8 @@ public class cnlc_flow {
 //		}
 		//加上热门评论的帖子的id
 //		String hot_artices_str= httpUtil.doGet("http://app.cainiaolc.com/forum/recommends?page=0&perpage=1000", "utf-8");
+
+
 		int[] recommends_keys = {225410,225411,467782};
 		int recommends_cate = recommends_keys[random.nextInt(recommends_keys.length)];
 		try {
@@ -219,7 +233,7 @@ public class cnlc_flow {
 
 		System.out.println("评论数大于3的帖子数有---"+contentIDs.size());
 		//回复两个评论
-		for(int i=0;i<2;i++){
+		for(int i=0;i<1;i++){
 			//随机选一个帖子id
 			String random_article_id = getRandomElement(contentIDs);
 			System.out.println("随机获取的帖子id是=="+random_article_id);
@@ -239,6 +253,28 @@ public class cnlc_flow {
 				String replay_content = TuLing.getMessageByInput(content);
 				//回复评论
 				Map<String,String> sub_comment = new HashMap<String, String>();
+
+                sub_comment.clear();
+                sub_comment.put("id", random_article_id);
+                String detail = httpUtil.doPost("http://app.cainiaolc.com/forum/detail", sub_comment, "utf-8");
+                System.out.println("回帖后查看状态=="+detail);
+
+                httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
+
+                try {
+                    Thread.sleep(10000);
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+
+                sub_comment.clear();
+                sub_comment.put("id", random_article_id);
+                sub_comment.put("perpage", "10");
+                sub_comment.put("page", "0");
+                httpUtil.doPost("http://app.cainiaolc.com/forum/aclist", sub_comment, "utf-8");
+
+
 				String postId = getRandomElement(contentIDs);
 				sub_comment.put("id", random_article_id);
 				sub_comment.put("cid", comment_id);
@@ -246,12 +282,26 @@ public class cnlc_flow {
 				sub_comment.put("content", replay_content);
 				String re_comment = httpUtil.doPost("http://app.cainiaolc.com/forum/comment", sub_comment, "utf-8");
 				System.out.println("回帖后的状态=="+re_comment);
-				String detail = httpUtil.doPost("http://app.cainiaolc.com/forum/detail", sub_comment, "utf-8");
+
+                sub_comment.clear();
+                sub_comment.put("id", random_article_id);
+                detail = httpUtil.doPost("http://app.cainiaolc.com/forum/detail", sub_comment, "utf-8");
 				System.out.println("回帖后查看状态=="+detail);
+
+				sub_comment.clear();
+				sub_comment.put("id", random_article_id);
+				sub_comment.put("perpage", "10");
+				sub_comment.put("page", "0");
+				httpUtil.doPost("http://app.cainiaolc.com/forum/aclist", sub_comment, "utf-8");
+
 				httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
 			}
 		}
-
+		coin_userSumary = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
+		System.out.println("金币："+coin_userSumary);
+		score =  JSONObject.parseObject(coin_userSumary).getJSONObject("Data").getInteger("score");
+		System.out.println("回帖后的奖励是=="+(score-user.getScore()));
+		user.setScore(score);
 //
 ////        发帖
 //		if(contentList.size()!=0){
@@ -344,7 +394,7 @@ public class cnlc_flow {
 		JSONObject finaJson = JSONObject.parseObject(replayCommentresult);
 		score = finaJson.getJSONObject("Data").getInteger("score");
 		System.out.println("流程完毕后最后的结果==="+score);
-		user.setEarn(score-user.getScore());
+		user.setEarn(score-beginScore);
 		user.setScore(score);
 		OperateOracle operateOracle = new OperateOracle();
 //		operateOracle.updateAppData("菜鸟理财",user.getUser_name(),user.getTelephone(),"",user.getPassword(),score,user.getCnuserID());
