@@ -15,9 +15,10 @@ import util.Utils;
 public class cnlc_flow {
 	public static void main(String[] args) {
 		cnUser zzq2 = new cnUser();
-		zzq2.setTelephone("15144584420");
+		zzq2.setTelephone("15246043016");
 		zzq2.setUser_name("易码500");		zzq2.setPassword("d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");
 		zzq2.setDeviceID(Utils.randomHexString(16));
+		zzq2.setScore(0);
 		 Random random = new Random();
 	     int s = random.nextInt(Utils.user_agents.length);
 	     zzq2.setUser_agent(Utils.user_agents[s]);

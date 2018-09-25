@@ -298,6 +298,7 @@ public class OperateOracle {
             	 user.setTelephone(rs.getString("APP_USERTEL"));
             	 user.setCnuserID(rs.getString("APP_USERID"));
             	 user.setPassword(rs.getString("APP_USERPASSWORD"));
+            	 user.setScore(rs.getInt("APP_USERSCORE"));
             	 if(rs.getString("DEVICE_ID")==""||rs.getString("DEVICE_ID")==null) {
             		 user.setDeviceID(Utils.randomHexString(16));
             	 }else {
