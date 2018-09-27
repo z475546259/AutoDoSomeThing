@@ -15,7 +15,7 @@ import util.Utils;
 public class cnlc_flow {
 	public static void main(String[] args) {
 		cnUser zzq2 = new cnUser();
-		zzq2.setTelephone("15246043016");
+		zzq2.setTelephone("13731474715");
 		zzq2.setUser_name("易码500");		zzq2.setPassword("d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");
 		zzq2.setDeviceID(Utils.randomHexString(16));
 		zzq2.setScore(0);
@@ -99,17 +99,23 @@ public class cnlc_flow {
 		getIDs(api_homeData,ids);
 		int count_article = 0;
 		for (String id : ids) {
-			if(count_article>10) {break;}
+			if(count_article>15) {break;}
 			count_article++;
 			//查看文章
 			httpUtil.doGet("http://app.cainiaolc.com/article/detailSimple?id="+id, "utf-8");
-			httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
+			//httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
 			try {
-				Thread.sleep(12000);
+				Thread.sleep(10000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			//查看菜点
+			coin_userSumary = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
+			System.out.println("金币："+coin_userSumary);
+			score =  JSONObject.parseObject(coin_userSumary).getJSONObject("Data").getInteger("score");
+			System.out.println("查看第"+count_article+"篇文章后的奖励是=="+(score-user.getScore()));
+			user.setScore(score);
 		}
 		//收藏文章 如果userID尾数与星期相同就收藏文章
 		int xq = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
@@ -210,7 +216,7 @@ public class cnlc_flow {
 		int[] recommends_keys = {225410,225411,467782};
 		int recommends_cate = recommends_keys[random.nextInt(recommends_keys.length)];
 		try {
-			Thread.sleep(random.nextInt(20)*100);
+			Thread.sleep(random.nextInt(20)*10);
 		} catch (InterruptedException e1) {
 			// 获取大规模数据list前随机休息一下，减少线程并发之间导致服务器压力过大而崩溃
 			e1.printStackTrace();
@@ -263,7 +269,7 @@ public class cnlc_flow {
                 httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
 
                 try {
-                    Thread.sleep(10000);
+                    Thread.sleep(9000);
                 } catch (InterruptedException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
