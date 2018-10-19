@@ -6,9 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import cainiaolicai.RecordToFile;
 import cainiaolicai.cnUser;
@@ -321,7 +319,26 @@ public class OperateOracle {
          }
     	return cnUsers;
     }
-    
+    /**
+     * 从数据库取现成的帖子
+     */
+    public List<String> getPosts(){
+        List<String> result = new ArrayList<>();
+        connection = getConnection();
+        String sql = "select post_id,post_content from REPTILE_POST where is_del = 0 and app_post_id is null";
+        try {
+            pstm = connection.prepareStatement(sql);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                result.add(rs.getLong("POST_ID")+"_"+rs.getString("POST_CONTENT"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            ReleaseResource();
+        }
+        return result;
+    }
     
     
     /**
@@ -397,6 +414,35 @@ public class OperateOracle {
         } catch (SQLException e) {
             e.printStackTrace();
             
+        } finally {
+            ReleaseResource();
+        }
+        return flag;
+    }
+
+    /**
+     * 更新爬取的帖子的使用状况
+     *
+     */
+    public boolean updatePost(Integer post_id,Integer app_post_id) {
+        Boolean flag = false;
+        connection = getConnection();
+        // String sql =
+        // "insert into student values('1','王小军','1','17','北京市和平里七区30号楼7门102')";
+//        String sql = "select count(*) from student where 1 = 1";
+        String sqlStr = "UPDATE REPTILE_POST set app_post_id=? where post_id= ?";
+
+        try {
+            // 执行插入数据操作,
+            pstm = connection.prepareStatement(sqlStr);
+            pstm.setInt(1, app_post_id);
+            pstm.setInt(2, post_id);
+
+            pstm.executeUpdate();
+            flag = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+
         } finally {
             ReleaseResource();
         }

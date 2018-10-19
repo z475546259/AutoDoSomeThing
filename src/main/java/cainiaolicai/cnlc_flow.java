@@ -28,6 +28,7 @@ public class cnlc_flow {
 //		System.out.println(aa.doFormPost("http://app.cainiaolc.com/forum/post", new HashMap<String, String>(), "GB2312"));
 	}
 	public void autoDo(cnUser user){
+		OperateOracle operateOracle = new OperateOracle();
 		if(user.getDeviceID()==null){
 			user.setDeviceID(Utils.randomHexString(16));
 		}
@@ -105,7 +106,7 @@ public class cnlc_flow {
 			httpUtil.doGet("http://app.cainiaolc.com/article/detailSimple?id="+id, "utf-8");
 			//httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
 			try {
-				Thread.sleep(10000);
+				Thread.sleep(12000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -173,8 +174,40 @@ public class cnlc_flow {
 
 
 
-
-
+		//发帖
+		ReceiveMessage rm = new ReceiveMessage();
+		String post = rm.getOnePost();
+		String post_id = post.split("_")[0];
+		String post_content = post.split("_")[1];
+		Integer app_post_id = 0 ;
+		if(!(post.equals("")||post==null)){
+			Map<String,String> forum_para = new HashMap<String, String>();
+			try {
+				Thread.sleep(20000);
+				forum_para.put("content",post_content);
+				forum_para.put("category", "p2p");
+				forum_para.put("cateId", 225410+"");
+				forum_para.put("upload", "0");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			String forum_post = httpUtil.doFormPost("http://app.cainiaolc.com/forum/post", forum_para, "utf-8");
+			System.out.println("发帖后返回内容=="+forum_post);
+			httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
+			String article_list= httpUtil.doGet("http://app.cainiaolc.com/forum/list?page=0&perpage=10&cate="+225410+"&order=time", "utf-8");
+			System.out.println("获取帖子列表后："+article_list);
+			JSONObject json1 = JSONObject.parseObject(article_list);
+			JSONArray  articles = json1.getJSONArray("Data");
+			for (Object obj:articles) {
+				JSONObject j = (JSONObject) obj;
+				if(j.getString("content").equals(post_content)){
+					app_post_id = j.getInteger("id");
+					operateOracle.updatePost(Integer.parseInt(post_id),app_post_id);
+					break;
+				}
+			}
+		}
 		//获取别人发帖内容列表
 //		int[] cates_keys = {225410,225411,225412,225413,240756,467782};
 //		Map<Integer,String> cates = new HashMap<>();
@@ -403,7 +436,7 @@ public class cnlc_flow {
 		System.out.println("流程完毕后最后的结果==="+score);
 		user.setEarn(score-beginScore);
 		user.setScore(score);
-		OperateOracle operateOracle = new OperateOracle();
+
 //		operateOracle.updateAppData("菜鸟理财",user.getUser_name(),user.getTelephone(),"",user.getPassword(),score,user.getCnuserID());
 		operateOracle.updateAppData("菜鸟理财",user);
 	}
