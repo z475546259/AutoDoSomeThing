@@ -110,7 +110,14 @@ public class cnlc_flow {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			//查看菜点
+			coin_userSumary = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
+			System.out.println("金币："+coin_userSumary);
+			score =  JSONObject.parseObject(coin_userSumary).getJSONObject("Data").getInteger("score");
+			System.out.println("查看第"+count_article+"篇文章后的奖励是=="+(score-user.getScore()));
+			user.setScore(score);
 		}
+		
 		//收藏文章 如果userID尾数与星期相同就收藏文章
 		int xq = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
 		if(Integer.parseInt(cnUserID)%7!=xq){

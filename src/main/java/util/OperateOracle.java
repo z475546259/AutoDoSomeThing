@@ -288,7 +288,7 @@ public class OperateOracle {
     public List<cnUser> getCnUsers(){
     	List<cnUser> cnUsers = new ArrayList<cnUser>();
     	 connection = getConnection();
-         String sql = "select * from app_autodo_result where is_del = 0 and app_name='菜鸟理财'";
+         String sql = "select * from app_autodo_result where is_del = 2 and app_name='菜鸟理财'";
          try {
              pstm = connection.prepareStatement(sql);
              rs = pstm.executeQuery();
@@ -331,11 +331,11 @@ public class OperateOracle {
     	List<cnUser> cnUsers = new ArrayList<cnUser>();
     	 connection = getConnection();
          String sql = "select t1.*"+
-        		 		" from (select rownum rn, a.* from APP_AUTODO_RESULT a order by id asc) t1,"+
-        		 		" (select rownum rn, b.* from APP_AUTODO_RESULT b order by id asc) t2"+
+        		 		" from (select rownum rn, a.* from APP_AUTODO_RESULT a where a.app_name='菜鸟理财' and a.is_del = 0 order by id asc) t1,"+
+        		 		" (select rownum rn, b.* from APP_AUTODO_RESULT b where b.app_name='菜鸟理财' and b.is_del = 0 order by id asc) t2"+
         		 		" where t1.app_userpassword = t2.app_userpassword"+
         		 		" and abs(t1.app_userid - t2.app_userid) < ?"+
-        		 		" and mod(t1.rn, 2) = 1"+
+        		 		" and mod(t1.rn, 2) = 0"+
         		 		" and t1.rn = t2.rn - 1";
          try {
              pstm = connection.prepareStatement(sql);
