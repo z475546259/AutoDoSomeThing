@@ -15,7 +15,7 @@ import util.Utils;
 public class cnlc_flow {
 	public static void main(String[] args) {
 		cnUser zzq2 = new cnUser();
-		zzq2.setTelephone("15246043016");
+		zzq2.setTelephone("13731474715");
 		zzq2.setUser_name("易码500");		zzq2.setPassword("d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");
 		zzq2.setDeviceID(Utils.randomHexString(16));
 		zzq2.setScore(0);
@@ -28,6 +28,7 @@ public class cnlc_flow {
 //		System.out.println(aa.doFormPost("http://app.cainiaolc.com/forum/post", new HashMap<String, String>(), "GB2312"));
 	}
 	public void autoDo(cnUser user){
+		OperateOracle operateOracle = new OperateOracle();
 		if(user.getDeviceID()==null){
 			user.setDeviceID(Utils.randomHexString(16));
 		}
@@ -99,11 +100,11 @@ public class cnlc_flow {
 		getIDs(api_homeData,ids);
 		int count_article = 0;
 		for (String id : ids) {
-			if(count_article>10) {break;}
+			if(count_article>15) {break;}
 			count_article++;
 			//查看文章
 			httpUtil.doGet("http://app.cainiaolc.com/article/detailSimple?id="+id, "utf-8");
-			httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
+			//httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
 			try {
 				Thread.sleep(12000);
 			} catch (InterruptedException e) {
@@ -174,8 +175,40 @@ public class cnlc_flow {
 
 
 
-
-
+		//发帖
+		ReceiveMessage rm = new ReceiveMessage();
+		String post = rm.getOnePost();
+		String post_id = post.split("_")[0];
+		String post_content = post.split("_")[1];
+		Integer app_post_id = 0 ;
+		if(!(post.equals("")||post==null)){
+			Map<String,String> forum_para = new HashMap<String, String>();
+			try {
+				Thread.sleep(20000);
+				forum_para.put("content",post_content);
+				forum_para.put("category", "p2p");
+				forum_para.put("cateId", 225410+"");
+				forum_para.put("upload", "0");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			String forum_post = httpUtil.doFormPost("http://app.cainiaolc.com/forum/post", forum_para, "utf-8");
+			System.out.println("发帖后返回内容=="+forum_post);
+			httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
+			String article_list= httpUtil.doGet("http://app.cainiaolc.com/forum/list?page=0&perpage=10&cate="+225410+"&order=time", "utf-8");
+			System.out.println("获取帖子列表后："+article_list);
+			JSONObject json1 = JSONObject.parseObject(article_list);
+			JSONArray  articles = json1.getJSONArray("Data");
+			for (Object obj:articles) {
+				JSONObject j = (JSONObject) obj;
+				if(j.getString("content").equals(post_content)){
+					app_post_id = j.getInteger("id");
+					operateOracle.updatePost(Integer.parseInt(post_id),app_post_id);
+					break;
+				}
+			}
+		}
 		//获取别人发帖内容列表
 //		int[] cates_keys = {225410,225411,225412,225413,240756,467782};
 //		Map<Integer,String> cates = new HashMap<>();
@@ -217,7 +250,7 @@ public class cnlc_flow {
 		int[] recommends_keys = {225410,225411,467782};
 		int recommends_cate = recommends_keys[random.nextInt(recommends_keys.length)];
 		try {
-			Thread.sleep(random.nextInt(20)*100);
+			Thread.sleep(random.nextInt(20)*10);
 		} catch (InterruptedException e1) {
 			// 获取大规模数据list前随机休息一下，减少线程并发之间导致服务器压力过大而崩溃
 			e1.printStackTrace();
@@ -270,7 +303,7 @@ public class cnlc_flow {
                 httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
 
                 try {
-                    Thread.sleep(10000);
+                    Thread.sleep(9000);
                 } catch (InterruptedException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -404,7 +437,7 @@ public class cnlc_flow {
 		System.out.println("流程完毕后最后的结果==="+score);
 		user.setEarn(score-beginScore);
 		user.setScore(score);
-		OperateOracle operateOracle = new OperateOracle();
+
 //		operateOracle.updateAppData("菜鸟理财",user.getUser_name(),user.getTelephone(),"",user.getPassword(),score,user.getCnuserID());
 		operateOracle.updateAppData("菜鸟理财",user);
 	}
