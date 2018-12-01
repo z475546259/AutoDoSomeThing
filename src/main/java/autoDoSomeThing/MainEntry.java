@@ -6,6 +6,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 import cainiaolicai.*;
+import com.zzq.springcloud.entities.cnUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

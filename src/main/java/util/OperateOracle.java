@@ -1,5 +1,7 @@
 package util;
 
+import com.zzq.springcloud.entities.cnUser;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,9 +9,6 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.*;
-
-import cainiaolicai.RecordToFile;
-import cainiaolicai.cnUser;
 
 public class OperateOracle {
 

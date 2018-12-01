@@ -1,16 +1,14 @@
 package autoDoSomeThing;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import cainiaolicai.RecordToFile;
-import cainiaolicai.cnUser;
+import com.zzq.springcloud.entities.cnUser;
 import util.HttpClientUtil;
 import util.OperateOracle;
 import util.SHA256Util;

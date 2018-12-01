@@ -1,6 +1,6 @@
 package util;
 
-import cainiaolicai.cnUser;
+import com.zzq.springcloud.entities.cnUser;
 
 public class test {
 	public static void main(String[] args) {

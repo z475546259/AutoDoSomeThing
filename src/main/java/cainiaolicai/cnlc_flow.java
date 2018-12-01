@@ -2,6 +2,7 @@ package cainiaolicai;
 
 import java.util.*;
 
+import com.zzq.springcloud.entities.cnUser;
 import org.apache.http.HttpHost;
 
 import com.alibaba.fastjson.JSONArray;

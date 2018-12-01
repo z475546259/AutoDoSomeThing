@@ -68,6 +68,9 @@ public class TuLing {
         String dataStr =  sdf.format(calendar.getTime());
         System.out.println(xq);
         RecordToFile.record(new String[]{xq+" "+dataStr},"actId.txt",false);
+        for(int i=0;i<1000;i++){
+            TuLing.getMessageByInput("第"+(i+1)+"次问图灵机器人");
+        }
 //        TuLing.getMessageByInput("对未来生活的所有向往");
     }
 

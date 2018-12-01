@@ -1,5 +1,7 @@
 package cainiaolicai;
 
+import com.zzq.springcloud.entities.cnUser;
+
 public class CnThread implements Runnable{
 	public cnUser user;
 
@@ -14,6 +16,9 @@ public class CnThread implements Runnable{
 	public CnThread(cnUser user) {
 		super();
 		this.user = user;
+	}
+	public CnThread() {
+		super();
 	}
 
 	@Override
