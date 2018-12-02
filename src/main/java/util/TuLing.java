@@ -56,7 +56,7 @@ public class TuLing {
             System.out.println("截取后的图灵返回=="+responseMessage);
             return responseMessage;
         }catch (Exception e){
-            RecordToFile.record(new String[]{e.getMessage()},"errorLog.txt");
+            RecordToFile.record(new String[]{e.getMessage(),e.toString()},"errorLog.txt");
             return null;
         }
     }

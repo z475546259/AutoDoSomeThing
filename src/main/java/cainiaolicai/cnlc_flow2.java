@@ -8,6 +8,7 @@ import util.*;
 import java.util.*;
 
 public class cnlc_flow2 {
+	private static org.apache.log4j.Logger LOGGER = org.apache.log4j.Logger.getLogger(cnlc_flow2.class);
 	public static void main(String[] args) {
 		cnlc_flow2 flow =  new cnlc_flow2();
 		flow.autoDo();
@@ -17,15 +18,15 @@ public class cnlc_flow2 {
 		//从消息队列获取user
 		user = MQManager.MQConsumerQueueReceiveCnUser();
 		while(user!=null){
-			if(user.getDeviceID()==null){
+			if(user.getDeviceID()==null||"".equalsIgnoreCase(user.getDeviceID())){
 				user.setDeviceID(Utils.randomHexString(16));
 			}
-			if(user.getUser_agent()==null){
+			if(user.getUser_agent()==null||"".equalsIgnoreCase(user.getUser_agent())){
 				Random random = new Random();
 				int s = random.nextInt(Utils.user_agents.length);
 				user.setUser_agent(Utils.user_agents[s]);
 			}
-			if(user.getPassword()==null){
+			if(user.getPassword()==null||"".equalsIgnoreCase(user.getPassword())){
 				user.setPassword("d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");;
 			}
 			HttpClientUtil httpUtil = new HttpClientUtil();
@@ -40,7 +41,7 @@ public class cnlc_flow2 {
 //		httpUtil.setTarget(target);
 			//登录
 			String login_res = httpUtil.doPost("http://app.cainiaolc.com/user/login", para, "utf-8");
-			System.out.println("登录："+login_res);
+			LOGGER.info(user.getTelephone()+"登录："+login_res);
 			String  cnUserID = JSONObject.parseObject(login_res).get("Data").toString();
 			httpUtil.setCnUserID(cnUserID);
 			user.setCnuserID(cnUserID);

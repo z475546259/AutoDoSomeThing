@@ -35,7 +35,7 @@ public class MQManager {
             session.close();
             connection.close();
         } catch (JMSException e) {
-            RecordToFile.record(new String[]{"获取MQ消息异常了",e.getMessage()}, "error-log.txt",true);
+            RecordToFile.record(new String[]{"获取MQ消息异常了",e.getMessage(),e.toString()}, "error-log.txt",true);
             e.printStackTrace();
         }
         return cnUser;

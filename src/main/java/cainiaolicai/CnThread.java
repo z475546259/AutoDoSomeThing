@@ -3,6 +3,7 @@ package cainiaolicai;
 import com.zzq.springcloud.entities.cnUser;
 
 public class CnThread implements Runnable{
+	private static org.apache.log4j.Logger LOGGER = org.apache.log4j.Logger.getLogger(CnThread.class);
 	public cnUser user;
 
 	public cnUser getUser() {
@@ -30,6 +31,7 @@ public class CnThread implements Runnable{
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println("线程报错了，捕获："+e.getMessage());
+			LOGGER.error(e);
 		}
 //		Thread.currentThread().notifyAll();
 	}

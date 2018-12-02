@@ -62,7 +62,7 @@ public class MysqlManager {
                 connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
-                RecordToFile.record(new String[]{"断开数据库连接失败"}, "error-log.txt",true);
+                RecordToFile.record(new String[]{"断开数据库连接失败",e.toString()}, "error-log.txt",true);
             }
         }
         return  cnUsers;

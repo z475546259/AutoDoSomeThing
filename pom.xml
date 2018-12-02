@@ -6,19 +6,19 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/dom4j/dom4j 解析自定义xml用  DOM4J性能最好，不考虑可移植性-->
-		<dependency>
-		    <groupId>dom4j</groupId>
-		    <artifactId>dom4j</artifactId>
-		    <version>1.6.1</version>
-		</dependency>
+		<!--<dependency>-->
+		    <!--<groupId>dom4j</groupId>-->
+		    <!--<artifactId>dom4j</artifactId>-->
+		    <!--<version>1.6.1</version>-->
+		<!--</dependency>-->
 		
 		<!-- https://mvnrepository.com/artifact/jdom/jdom 生成自定义xml用-->
-		<dependency>
-		    <groupId>jdom</groupId>
-		    <artifactId>jdom</artifactId>
-		    <version>1.0</version>
-		</dependency>
-		
+		<!--<dependency>-->
+		    <!--<groupId>jdom</groupId>-->
+		    <!--<artifactId>jdom</artifactId>-->
+		    <!--<version>1.0</version>-->
+		<!--</dependency>-->
+		<!---->
 		<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
 		<dependency>
 			<groupId>org.apache.maven.plugins</groupId>
@@ -67,22 +67,22 @@
 			<version>1.2.28</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/net.sourceforge.tess4j/tess4j -->
-		<dependency>
-		    <groupId>net.sourceforge.tess4j</groupId>
-		    <artifactId>tess4j</artifactId>
-		    <version>3.2.1</version>
-		    <exclusions>
-				<exclusion>
-					 <groupId>org.slf4j</groupId>
-		    		 <artifactId>slf4j-api</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-		    <groupId>org.slf4j</groupId>
-		    <artifactId>slf4j-api</artifactId>
-		    <version>1.7.25</version>
-		</dependency>
+		<!--<dependency>-->
+		    <!--<groupId>net.sourceforge.tess4j</groupId>-->
+		    <!--<artifactId>tess4j</artifactId>-->
+		    <!--<version>3.2.1</version>-->
+		    <!--<exclusions>-->
+				<!--<exclusion>-->
+					 <!--<groupId>org.slf4j</groupId>-->
+		    		 <!--<artifactId>slf4j-api</artifactId>-->
+				<!--</exclusion>-->
+			<!--</exclusions>-->
+		<!--</dependency>-->
+		<!--<dependency>-->
+		    <!--<groupId>org.slf4j</groupId>-->
+		    <!--<artifactId>slf4j-api</artifactId>-->
+		    <!--<version>1.7.25</version>-->
+		<!--</dependency>-->
 
 		<!-- https://mvnrepository.com/artifact/org.apache.activemq/activemq-broker -->
 		<dependency>
@@ -108,12 +108,38 @@
 			<artifactId>geronimo-jms_1.1_spec</artifactId>
 			<version>1.1.1</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+		<!-- https://mvnrepository.com/artifact/log4j/log4j -->
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.7.25</version>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+		<!--<dependency>-->
+			<!--<groupId>org.slf4j</groupId>-->
+			<!--<artifactId>slf4j-api</artifactId>-->
+			<!--<version>1.7.25</version>-->
+		<!--</dependency>-->
+		<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>2.9.1</version>
+		</dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.11.1</version>
+        </dependency>
+		<!-- https://mvnrepository.com/artifact/log4j/apache-log4j-extras -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>apache-log4j-extras</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>

@@ -43,6 +43,7 @@ import org.apache.http.util.EntityUtils;
  * 鍒╃敤HttpClient杩涜post璇锋眰鐨勫伐鍏风被
  */
 public class HttpClientUtil {
+    private static org.apache.log4j.Logger LOGGER = org.apache.log4j.Logger.getLogger(HttpClientUtil.class);
     private HttpClient httpClient = null;
     public List<String> cookies =new ArrayList<String>();
     HttpHost target ;// = new HttpHost("192.168.1.4", 8888,  "http");
@@ -308,7 +309,7 @@ public class HttpClientUtil {
                     InputStreamReader isr = new InputStreamReader(gzin,"utf-8");
                     result = Utils.getStringFromInputStreamReader(isr);
                 }catch (IOException exception){
-                    exception.printStackTrace();
+                    LOGGER.error(exception);
                 }
                 httpGet.releaseConnection();
             }
@@ -377,7 +378,7 @@ public class HttpClientUtil {
                   InputStreamReader isr = new InputStreamReader(gzin,"utf-8");
                   result = Utils.getStringFromInputStreamReader(isr);
               }catch (IOException exception){
-                  exception.printStackTrace();
+                  LOGGER.error(exception);
               }
               httpPost.releaseConnection();
           }
