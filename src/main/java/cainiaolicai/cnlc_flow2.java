@@ -17,6 +17,8 @@ public class cnlc_flow2 {
 		cnUser user =  new cnUser();
 		//从消息队列获取user
 		user = MQManager.MQConsumerQueueReceiveCnUser();
+//		user.setPassword("d5c91303b3963ea463d4d97b616f06224f2469bdb4d9984ca696dd37c7059a7b");
+//		user.setTelephone("18794824771");
 		while(user!=null){
 			if(user.getDeviceID()==null||"".equalsIgnoreCase(user.getDeviceID())){
 				user.setDeviceID(Utils.randomHexString(16));
@@ -52,6 +54,9 @@ public class cnlc_flow2 {
 			para.put("h", "640");
 			String appOpen_res = httpUtil.doPost("http://app.cainiaolc.com/log/appOpen", para, "utf-8");
 			System.out.println("打开app："+appOpen_res);
+			//签到
+			String signResult = httpUtil.doGet("http://app.cainiaolc.com/signin", "utf-8");
+			System.out.println("签到："+signResult);
 			//查看菜点
 			String coin_userSumary = httpUtil.doGet("http://app.cainiaolc.com/coin/userSummary", "utf-8");
 			System.out.println("金币："+coin_userSumary);
